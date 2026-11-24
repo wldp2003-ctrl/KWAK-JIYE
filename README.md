@@ -6,6 +6,7 @@
 
 - 사이트 주소: https://wldp2003-ctrl.github.io/KWAK-JIYE/
 - 저장소: https://github.com/wldp2003-ctrl/KWAK-JIYE
+- 연락처(공개): wldp2003@naver.com — 마무리 카드와 푸터에 표시
 
 ## 파일 구성
 
