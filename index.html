@@ -188,6 +188,13 @@ h2{font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1.3;margin-
 .proj .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .proj h3{font-size:17px;font-weight:800;letter-spacing:-.025em;line-height:1.5}
 .proj p{font-size:14px;color:var(--sub);margin-top:8px;line-height:1.65}
+.proj{position:relative}
+.proj .body{display:flex;flex-direction:column;height:calc(100% - 36px)}
+.proj h3 a.stretch::after{content:"";position:absolute;inset:0;z-index:1}
+.proj h3 a.stretch:focus-visible{outline:none}
+.proj:focus-within{outline:2px solid var(--ink);outline-offset:3px}
+.proj .more{margin-top:auto;padding-top:14px;font-size:13px;font-weight:700;color:var(--ink);transition:transform .2s}
+.proj:hover .more{transform:translateX(3px)}
 
 /* ---------- 8) 마무리 ---------- */
 .next .body{padding:44px 36px;text-align:center}
@@ -475,33 +482,37 @@ footer{border-top:1px solid var(--line);padding:48px 0 40px;margin-top:8px}
         <article class="win proj rise">
           <div class="bar"><span class="lights sm" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">cm-proposal</span></div>
           <div class="body">
-            <div class="chips"><span class="chip">CM 제안서</span><span class="chip line">2026</span></div>
-            <h3>광양 동호안 LNG 냉열 기반 하이퍼스케일 데이터센터 건립 CM 제안서</h3>
+            <div class="chips"><span class="chip r">CM 제안서</span><span class="chip line">2026</span><span class="chip line">무영CM 경진대회 혁신상</span></div>
+            <h3><a class="stretch" href="projects/cm-proposal/">광양 동호안 LNG 냉열 기반 하이퍼스케일 데이터센터 건립 CM 제안서</a></h3>
             <p>LNG 냉열을 활용하는 데이터센터 건립 사업의 건설사업관리 제안서</p>
+            <span class="more">자세히 보기 →</span>
           </div>
         </article>
         <article class="win proj rise">
           <div class="bar"><span class="lights sm" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">research</span></div>
           <div class="body">
-            <div class="chips"><span class="chip">연구</span><span class="chip line">2026</span></div>
-            <h3>발열팩 분말을 활용한 영하 환경 콘크리트의 수화 반응 촉진 연구</h3>
+            <div class="chips"><span class="chip g">연구</span><span class="chip line">2026</span><span class="chip line">캡스톤</span></div>
+            <h3><a class="stretch" href="projects/winter-concrete/">발열팩 분말을 활용한 영하 환경 콘크리트의 수화 반응 촉진 연구</a></h3>
             <p>영하의 현장 조건에서 콘크리트 수화 반응을 돕는 방법 연구</p>
+            <span class="more">자세히 보기 →</span>
           </div>
         </article>
         <article class="win proj rise">
           <div class="bar"><span class="lights sm" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">idea</span></div>
           <div class="body">
             <div class="chips"><span class="chip o">아이디어 제안</span><span class="chip line">2026</span><span class="chip line">차세대 건설리더 아카데미</span></div>
-            <h3>OSC 생애주기 관리를 위한 Digital Module Passport</h3>
+            <h3><a class="stretch" href="projects/osc-dmp/">OSC 생애주기 관리를 위한 Digital Module Passport</a></h3>
             <p>탈현장 건설 모듈의 생애주기 데이터를 관리하고 해체 후 재사용까지 잇는 아이디어</p>
+            <span class="more">자세히 보기 →</span>
           </div>
         </article>
         <article class="win proj rise">
           <div class="bar"><span class="lights sm" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">contest</span></div>
           <div class="body">
             <div class="chips"><span class="chip r">공모전</span><span class="chip line">2026</span><span class="chip line">도로경관디자인 대전</span></div>
-            <h3>두 번 멈추는 휴게소</h3>
+            <h3><a class="stretch" href="projects/rest-area/">두 번 멈추는 휴게소</a></h3>
             <p>휴게소 보행자 충돌사고를 줄이는 벤치·플랜터 겸용 방호 시설 제안</p>
+            <span class="more">자세히 보기 →</span>
           </div>
         </article>
       </div>
