@@ -33,7 +33,9 @@
   var G = {
     cm: {t:'무영CM 경진대회 · 혁신상', link:'projects/cm-proposal/', p:[
       ['images/gallery/cm/01.jpg','혁신상 수상 (팀 잼민아이)'],
-      ['images/gallery/cm/02.jpg','팀 발표']]},
+      ['images/gallery/cm/02.jpg','팀 발표'],
+      ['images/gallery/cm/03.jpg','경진대회 현장'],
+      ['images/gallery/cm/04.jpg','경진대회 현장']]},
     schedule: {t:'한국건설관리학회 공정관리 경진대회', p:[
       ['images/gallery/schedule/01.jpg','참가 확인증 · 2026년 11월 6일, 여수'],
       ['images/gallery/schedule/02.jpg','참가 명찰 · 공정관리 2팀'],
