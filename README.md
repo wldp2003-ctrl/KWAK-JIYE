@@ -17,11 +17,12 @@ site/
  ├─ strength/           역량
  ├─ history/            이력 (학생회장 활동 사진 보기 포함)
  ├─ activity/           활동 (분류 버튼, 카메라 표시가 있는 활동은 사진 보기)
- ├─ projects/           프로젝트 목록 + 상세 페이지 4개 (각 폴더에 index.html + img/)
+ ├─ projects/           프로젝트 목록 + 상세 페이지 5개 (각 폴더에 index.html + img/)
  │   ├─ cm-proposal/      광양 동호안 LNG 냉열 데이터센터 CM 제안서
  │   ├─ winter-concrete/  발열팩 분말 영하 환경 콘크리트 연구 (캡스톤)
  │   ├─ osc-dmp/          OSC Digital Module Passport (차세대 건설리더 아카데미)
- │   └─ rest-area/        두 번 멈추는 휴게소 (도로경관디자인 대전)
+ │   ├─ rest-area/        두 번 멈추는 휴게소 (도로경관디자인 대전)
+ │   └─ ai-apps/          AI 활용 프로젝트 (하반기 캡스톤) — play/에 LRFD 놀이터·지예건설 원본 앱
  ├─ contact/            연락 (마무리 메시지, 이메일)
  ├─ assets/site.css     메인과 위 페이지들이 함께 쓰는 디자인
  ├─ assets/site.js      메뉴, 활동 분류, 사진 보기 창, 스크롤 효과
@@ -42,7 +43,7 @@ site/
 | 역량 | `/strength/` | 리더십 · 책임감 · 건설사업관리 카드 3개 |
 | 이력 | `/history/` | 학력 2개 + 직책 4줄 번호 타임라인 |
 | 활동 | `/activity/` | 분류 버튼 + 활동 9개, 사진 보기 |
-| 프로젝트 | `/projects/` | 프로젝트 카드 4개 → 상세 페이지 |
+| 프로젝트 | `/projects/` | 프로젝트 카드 5개 → 상세 페이지 |
 | 연락 | `/contact/` | next step 카드, 이메일 |
 
 색의 뜻: 빨강 = 공모전·대회·수상, 주황 = 대외, 초록 = 교내·직책

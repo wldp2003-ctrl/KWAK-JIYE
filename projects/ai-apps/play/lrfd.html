@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>볼트쌤의 LRFD 놀이터</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFF7EC;--ink:#2B2D42;--steel:#3D5A80;--sky:#CFE4F2;--accent:#EE6C4D;--ok:#2A9D8F;--no:#E63946;--ten:#2F6FDB;--com:#E04F3A;--muted:#7a7f95;--line:#eadfcd}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:560px;margin:0 auto;padding:12px 14px 48px;min-height:100vh}
+header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.hbtn{border:none;background:#fff;border-radius:12px;padding:8px 11px;font-size:15px;box-shadow:0 2px 0 var(--line);cursor:pointer;color:var(--ink);font-family:inherit}
+.htitle{flex:1;font-family:'Jua',sans-serif;font-size:18px;line-height:1.25}
+.htitle small{display:block;font-family:'Noto Sans KR',sans-serif;font-size:12px;color:var(--muted)}
+.stars{font-family:'Jua',sans-serif;font-size:16px;background:#fff;padding:6px 10px;border-radius:12px;box-shadow:0 2px 0 var(--line);white-space:nowrap}
+.prog{height:8px;background:#eadfcd;border-radius:6px;overflow:hidden;margin-bottom:12px}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .35s}
+.vis{background:#fff;border-radius:18px;padding:10px;box-shadow:0 3px 0 var(--line);margin-bottom:12px}
+.vis svg{width:100%;height:auto;display:block}
+.talk{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}
+.mascot{font-size:26px;flex:none;width:46px;height:46px;border-radius:50%;background:var(--sky);display:grid;place-items:center}
+.bubble{background:#fff;border-radius:4px 18px 18px 18px;padding:12px 14px;box-shadow:0 3px 0 var(--line);flex:1;font-size:16.5px;line-height:1.65}
+.bubble p{margin:0 0 9px}.bubble p:last-child{margin:0}
+.new{animation:pop .35s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.k{color:var(--accent);font-weight:800}
+.t{color:var(--ten);font-weight:800}.c{color:var(--com);font-weight:800}
+.eq{display:inline-block;background:#f3efe8;border-radius:8px;padding:1px 7px;font-weight:600}
+.btn{display:block;width:100%;border:none;border-radius:16px;padding:14px;font-family:'Jua',sans-serif;font-size:19px;background:var(--steel);color:#fff;box-shadow:0 4px 0 #24364f;cursor:pointer;margin-top:8px}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #24364f}
+.btn.alt{background:#fff;color:var(--steel);box-shadow:0 4px 0 var(--line)}
+.btn.go{background:var(--accent);box-shadow:0 4px 0 #b5492f}
+.qtag{font-family:'Jua',sans-serif;color:var(--accent);font-size:15px;margin-bottom:4px}
+.q{font-size:17.5px;font-weight:600;line-height:1.55;margin-bottom:12px}
+.opts{display:grid;gap:9px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{border:2px solid #e3d6c2;background:#fff;border-radius:14px;padding:13px 14px;font-size:16px;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);line-height:1.45}
+.opts.two .opt{text-align:center;font-family:'Jua',sans-serif;font-size:22px}
+.opt.right{border-color:var(--ok);background:#e6f6f3}
+.opt.wrong{border-color:var(--no);background:#fdecee;animation:shake .3s}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.fb{border-radius:14px;padding:12px 14px;margin-top:12px;font-size:15.5px;line-height:1.65}
+.fb.ok{background:#e6f6f3;border-left:5px solid var(--ok)}
+.fb.no{background:#fff1e6;border-left:5px solid var(--accent)}
+.fb b{font-family:'Jua',sans-serif;font-weight:400;font-size:17px}
+.calc{font-family:'Jua',sans-serif;font-size:19px;line-height:1.8;background:#fff;border-radius:14px;padding:10px 14px;margin:8px 0;box-shadow:0 3px 0 var(--line)}
+.calc div{animation:pop .35s ease-out both}
+.home h1{font-family:'Jua',sans-serif;font-size:34px;line-height:1.2;margin:18px 0 6px;font-weight:400}
+.home .sub{color:var(--muted);font-size:15px;line-height:1.6;margin-bottom:14px}
+.scenes{display:grid;gap:8px;margin-top:10px}
+.scn{display:flex;gap:10px;align-items:center;background:#fff;border:none;border-radius:14px;padding:11px 12px;box-shadow:0 2px 0 var(--line);text-align:left;cursor:pointer;font-family:inherit;color:var(--ink);font-size:15px}
+.scn .n{font-family:'Jua',sans-serif;background:var(--sky);border-radius:10px;width:34px;height:34px;display:grid;place-items:center;flex:none;font-size:17px}
+.scn .done{margin-left:auto;color:var(--ok);font-family:'Jua',sans-serif}
+.overlay{position:fixed;inset:0;background:rgba(43,45,66,.45);display:flex;align-items:flex-end;justify-content:center;z-index:9}
+.sheet{background:var(--bg);width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:16px 14px 28px;max-height:85vh;overflow:auto}
+.sheet h3{font-family:'Jua',sans-serif;font-weight:400;margin:0 0 6px;font-size:20px}
+.slider{background:#fff;border-radius:18px;padding:14px;box-shadow:0 3px 0 var(--line);margin-bottom:10px}
+.slider input{width:100%;accent-color:var(--accent);height:30px}
+.tval{font-family:'Jua',sans-serif;font-size:30px;text-align:center}
+.tval small{font-size:16px;color:var(--muted)}
+.barrow{margin:10px 0}
+.barrow .lab{display:flex;justify-content:space-between;font-size:14px;margin-bottom:4px}
+.bar{position:relative;height:22px;background:#f1ebe1;border-radius:8px;overflow:visible}
+.bar i{display:block;height:100%;border-radius:8px;transition:width .2s,background .2s}
+.bar .nu{position:absolute;top:-5px;bottom:-5px;width:3px;background:var(--ink);border-radius:2px}
+.nulab{font-size:12.5px;color:var(--muted);margin-top:4px;text-align:right}
+.sum{background:#fff;border-radius:16px;padding:14px;box-shadow:0 3px 0 var(--line);margin:10px 0;line-height:1.7;font-size:15.5px}
+.sum h4{margin:0 0 4px;font-family:'Jua',sans-serif;font-weight:400;font-size:17px;color:var(--steel)}
+.big{font-family:'Jua',sans-serif;font-size:44px;text-align:center;margin:6px 0}
+.credit{font-size:12.5px;color:var(--muted);text-align:center;margin-top:18px;line-height:1.6}
+.legend{display:flex;gap:12px;justify-content:center;font-size:13px;margin-top:4px}
+.legend span::before{content:"";display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:4px;vertical-align:middle;background:var(--clr)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+/* ============ 그림(SVG) ============ */
+const F = "font-family='Jua, sans-serif'";
+function svgWrap(vb, inner){return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`}
+function arrowDefs(){return `<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B2D42"/></marker>
+<marker id="ahO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#EE6C4D"/></marker>
+<marker id="ahG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2A9D8F"/></marker>
+</defs>`}
+
+function kid(x,y,c){return `<g transform="translate(${x},${y})"><circle cx="0" cy="-26" r="8" fill="#FFD6A5"/><rect x="-8" y="-18" width="16" height="18" rx="5" fill="${c}"/></g>`}
+
+function visBench(){
+  return svgWrap("0 0 320 170", arrowDefs()+`
+  <line x1="10" y1="150" x2="310" y2="150" stroke="#cdbfa8" stroke-width="3"/>
+  <rect x="50" y="98" width="220" height="14" rx="5" fill="#3D5A80"/>
+  <rect x="68" y="112" width="10" height="38" fill="#3D5A80"/><rect x="242" y="112" width="10" height="38" fill="#3D5A80"/>
+  ${kid(95,98,'#EE6C4D')}${kid(130,98,'#2A9D8F')}${kid(165,98,'#F4A261')}${kid(200,98,'#2F6FDB')}${kid(235,98,'#9B5DE5')}
+  <line x1="160" y1="22" x2="160" y2="58" stroke="#2B2D42" stroke-width="3" marker-end="url(#ah)"/>
+  <text x="170" y="40" ${F} font-size="15" fill="#2B2D42">누르는 무게</text>
+  <line x1="73" y1="168" x2="73" y2="154" stroke="#2A9D8F" stroke-width="3" marker-end="url(#ahG)"/>
+  <line x1="247" y1="168" x2="247" y2="154" stroke="#2A9D8F" stroke-width="3" marker-end="url(#ahG)"/>
+  <text x="8" y="140" ${F} font-size="13" fill="#2A9D8F">버티는 힘</text>`);
+}
+
+function visModes(){
+  return svgWrap("0 0 330 150", `
+  <g transform="translate(10,10)"><rect width="96" height="128" rx="14" fill="#fdecee"/>
+   <path d="M14 70 L44 64 L40 74 L48 68" stroke="#3D5A80" stroke-width="8" fill="none" stroke-linecap="round"/>
+   <path d="M54 66 L84 80" stroke="#3D5A80" stroke-width="8" stroke-linecap="round"/>
+   <text x="48" y="40" text-anchor="middle" font-size="26">🐘</text>
+   <text x="48" y="104" text-anchor="middle" ${F} font-size="15" fill="#E63946">와장창!</text>
+   <text x="48" y="122" text-anchor="middle" font-size="11" fill="#2B2D42">극한 Ultimate</text></g>
+  <g transform="translate(117,10)"><rect width="96" height="128" rx="14" fill="#fff4dc"/>
+   <rect x="12" y="62" width="72" height="10" rx="4" fill="#3D5A80"/>
+   <path d="M44 62 L48 67 L44 72" stroke="#fff" stroke-width="2.5" fill="none"/>
+   <text x="48" y="44" text-anchor="middle" ${F} font-size="14" fill="#2B2D42">톡톡 ×10000</text>
+   <text x="48" y="104" text-anchor="middle" ${F} font-size="15" fill="#d98a00">쩍 금 감</text>
+   <text x="48" y="122" text-anchor="middle" font-size="11" fill="#2B2D42">피로 Fatigue</text></g>
+  <g transform="translate(224,10)"><rect width="96" height="128" rx="14" fill="#e6f1fa"/>
+   <path d="M12 66 Q30 50 48 66 T84 66" stroke="#3D5A80" stroke-width="8" fill="none" stroke-linecap="round"/>
+   <text x="48" y="40" text-anchor="middle" font-size="22">😵‍💫</text>
+   <text x="48" y="104" text-anchor="middle" ${F} font-size="15" fill="#2F6FDB">출렁출렁</text>
+   <text x="48" y="122" text-anchor="middle" font-size="11" fill="#2B2D42">사용성 Serviceability</text></g>`);
+}
+
+function visSteelFail(){
+  return svgWrap("0 0 330 150", `
+  <g transform="translate(10,10)"><rect width="96" height="128" rx="14" fill="#f3efe8"/>
+   <path d="M38 8 L58 8 L58 38 Q52 52 58 66 L58 92 L38 92 L38 66 Q44 52 38 38 Z" fill="#3D5A80"/>
+   <text x="48" y="112" text-anchor="middle" ${F} font-size="17">항복</text><text x="48" y="127" text-anchor="middle" font-size="11">쭉~ 늘어남</text></g>
+  <g transform="translate(117,10)"><rect width="96" height="128" rx="14" fill="#f3efe8"/>
+   <path d="M38 8 L58 8 L58 46 L50 52 L38 44 Z" fill="#3D5A80"/>
+   <path d="M38 60 L46 54 L58 62 L58 92 L38 92 Z" fill="#3D5A80"/>
+   <text x="48" y="112" text-anchor="middle" ${F} font-size="17">파단</text><text x="48" y="127" text-anchor="middle" font-size="11">뚝! 끊어짐</text></g>
+  <g transform="translate(224,10)"><rect width="96" height="128" rx="14" fill="#f3efe8"/>
+   <path d="M48 8 Q74 50 48 92" stroke="#3D5A80" stroke-width="7" fill="none" stroke-linecap="round"/>
+   <path d="M30 6 L48 6 M30 2 L30 10" stroke="#2B2D42" stroke-width="0"/>
+   <text x="48" y="112" text-anchor="middle" ${F} font-size="17">좌굴</text><text x="48" y="127" text-anchor="middle" font-size="11">휘청 꺾임</text></g>`);
+}
+
+function visLoadFactor(){
+  // D 300 -> 360(1.2) / 420(1.4) ; L 75 -> 120
+  const s=0.27;
+  const bar=(x,v,c,lab,top)=>`<rect x="${x}" y="${150-v*s}" width="38" height="${v*s}" rx="6" fill="${c}"/>
+    <text x="${x+19}" y="${144-v*s}" text-anchor="middle" ${F} font-size="14">${top}</text>
+    <text x="${x+19}" y="168" text-anchor="middle" font-size="12">${lab}</text>`;
+  return svgWrap("0 0 330 178", `
+   ${bar(20,300,'#98C1D9','D 원래','300')}${bar(64,360,'#3D5A80','D ×1.2','360')}
+   ${bar(170,75,'#F7C6B5','L 원래','75')}${bar(214,120,'#EE6C4D','L ×1.6','120')}
+   <text x="84" y="18" text-anchor="middle" ${F} font-size="14" fill="#3D5A80">의자 몸무게: 조금 부풀림</text>
+   <text x="230" y="18" text-anchor="middle" ${F} font-size="14" fill="#EE6C4D">친구들: 많이 부풀림</text>
+   <line x1="10" y1="150" x2="320" y2="150" stroke="#cdbfa8" stroke-width="2"/>`);
+}
+
+function visChain(items, pick){
+  // items: [{name, v}]
+  let g=""; const w=100;
+  items.forEach((it,i)=>{
+    const x=15+i*w, weak = pick!==undefined && i===pick;
+    g+=`<ellipse cx="${x+45}" cy="70" rx="44" ry="26" fill="none" stroke="${weak?'#E63946':'#3D5A80'}" stroke-width="${weak?7:9}" ${weak?"stroke-dasharray='14 6'":""}/>
+    <text x="${x+45}" y="76" text-anchor="middle" ${F} font-size="18" fill="${weak?'#E63946':'#2B2D42'}">${it.v}</text>
+    <text x="${x+45}" y="122" text-anchor="middle" ${F} font-size="14">${it.name}</text>`;
+  });
+  return svgWrap("0 0 330 140", `<text x="165" y="22" text-anchor="middle" ${F} font-size="14" fill="#7a7f95">각 고리 = 망가지는 방법별 설계강도 (kN)</text>`+g);
+}
+
+function visScale(req, des, show){
+  const diff = show ? Math.max(-1,Math.min(1,(req-des)/120)) : 0; // + : 왼쪽(소요) 무거움
+  const ang = diff*12;
+  return svgWrap("0 0 330 190", `
+   <polygon points="165,70 150,170 180,170" fill="#cdbfa8"/>
+   <g transform="rotate(${-ang} 165 70)">
+     <rect x="35" y="66" width="260" height="8" rx="4" fill="#3D5A80"/>
+     <g transform="translate(75,74) rotate(${ang})"><line x1="0" y1="0" x2="0" y2="22" stroke="#7a7f95" stroke-width="2"/>
+       <rect x="-55" y="22" width="110" height="46" rx="12" fill="#fff1e6" stroke="#EE6C4D" stroke-width="2"/>
+       <text x="0" y="42" text-anchor="middle" font-size="11.5">걱정 무게(소요강도)</text>
+       <text x="0" y="62" text-anchor="middle" ${F} font-size="18" fill="#EE6C4D">${req} kN</text></g>
+     <g transform="translate(255,74) rotate(${ang})"><line x1="0" y1="0" x2="0" y2="22" stroke="#7a7f95" stroke-width="2"/>
+       <rect x="-55" y="22" width="110" height="46" rx="12" fill="#e6f6f3" stroke="#2A9D8F" stroke-width="2"/>
+       <text x="0" y="42" text-anchor="middle" font-size="11.5">버티는 힘(설계강도)</text>
+       <text x="0" y="62" text-anchor="middle" ${F} font-size="18" fill="#2A9D8F">${des} kN</text></g>
+   </g>
+   <text x="165" y="22" text-anchor="middle" ${F} font-size="15">${show ? (des>=req?'버티는 힘이 이겼다! 안전 ✅':'걱정 무게가 더 커! 위험 ❌') : '어느 쪽이 이길까?'}</text>`);
+}
+
+/* 트러스: 하현 B0~B4, 상현 T0~T3 (정삼각형) */
+const BX=i=>30+70*i, BY=175, TX=i=>65+70*i, TY=175-60.6;
+const MEM=[
+ ['B0','B1',1.15,'하현 단부'],['B1','B2',2.31,'하현 중앙'],['B2','B3',2.31,'하현 중앙'],['B3','B4',1.15,'하현 단부'],
+ ['T0','T1',-1.73,'상현 단부'],['T1','T2',-2.31,'상현 중앙'],['T2','T3',-1.73,'상현 단부'],
+ ['B0','T0',-2.31,'단부 사재'],['T0','B1',1.15,'2번째 사재'],['B1','T1',-1.15,'3번째 사재'],['T1','B2',0,'중앙 사재'],
+ ['B2','T2',0,'중앙 사재'],['T2','B3',-1.15,'3번째 사재'],['B3','T3',1.15,'2번째 사재'],['T3','B4',-2.31,'단부 사재']];
+function pt(n){const i=+n[1];return n[0]==='B'?[BX(i),BY]:[TX(i),TY]}
+function visTruss(o={}){
+  let s=arrowDefs();
+  MEM.forEach(([a,b,f],idx)=>{
+    const [x1,y1]=pt(a),[x2,y2]=pt(b);
+    let col='#3D5A80', w=5, dash='';
+    if(o.forces){ if(f>0){col='#2F6FDB'} else if(f<0){col='#E04F3A'} else {col='#b9b9c6';dash="stroke-dasharray='5 5'"} w=f===0?3:3+Math.abs(f)*1.6; }
+    if(o.hi && o.hi.includes(idx)){col='#EE6C4D';w=7}
+    s+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${w}" stroke-linecap="round" ${dash}/>`;
+    if(o.forces){
+      const mx=(x1+x2)/2,my=(y1+y2)/2, lbl=f===0?'0':(f>0?'+':'−')+Math.abs(f);
+      const dy = y1===y2 ? (y1===BY?16:-8) : 4;
+      s+=`<text x="${mx}" y="${my+dy}" text-anchor="middle" font-size="10.5" font-weight="800" fill="${col==='#b9b9c6'?'#7a7f95':col}" paint-order="stroke" stroke="#fff" stroke-width="3">${lbl}</text>`;
+    }
+    if(o.labels && o.labels[idx]){
+      const mx=(x1+x2)/2,my=(y1+y2)/2;
+      s+=`<text x="${mx-14}" y="${my}" text-anchor="end" ${F} font-size="13" fill="#EE6C4D">${o.labels[idx]}</text>`;
+    }
+  });
+  for(let i=0;i<5;i++) s+=`<circle cx="${BX(i)}" cy="${BY}" r="5" fill="#fff" stroke="#2B2D42" stroke-width="2"/>`;
+  for(let i=0;i<4;i++){ s+=`<circle cx="${TX(i)}" cy="${TY}" r="5" fill="#fff" stroke="#2B2D42" stroke-width="2"/>
+     <line x1="${TX(i)}" y1="${TY-48}" x2="${TX(i)}" y2="${TY-9}" stroke="#2B2D42" stroke-width="2.5" marker-end="url(#ah)"/>
+     <text x="${TX(i)}" y="${TY-52}" text-anchor="middle" font-style="italic" font-weight="800" font-size="15">P</text>`;}
+  s+=`<polygon points="${BX(0)},${BY+6} ${BX(0)-10},${BY+22} ${BX(0)+10},${BY+22}" fill="#2B2D42"/>
+      <circle cx="${BX(4)}" cy="${BY+14}" r="8" fill="#2B2D42"/>`;
+  if(o.react){ [0,4].forEach(i=>{s+=`<line x1="${BX(i)}" y1="${BY+60}" x2="${BX(i)}" y2="${BY+26}" stroke="#2A9D8F" stroke-width="3.5" marker-end="url(#ahG)"/>
+      <text x="${BX(i)+(i?-8:8)}" y="${BY+55}" text-anchor="${i?'end':'start'}" ${F} font-size="16" fill="#2A9D8F">${o.react}</text>`});}
+  if(o.jointA){ s+=`<circle cx="${BX(1)}" cy="${BY}" r="24" fill="none" stroke="#EE6C4D" stroke-width="2.5" stroke-dasharray="6 4"/>
+      <text x="${BX(1)}" y="${BY+42}" text-anchor="middle" ${F} font-size="14" fill="#EE6C4D">Joint A</text>`;}
+  if(o.ring0){ s+=`<circle cx="${BX(0)}" cy="${BY}" r="20" fill="none" stroke="#EE6C4D" stroke-width="2.5" stroke-dasharray="6 4"/>`;}
+  const legend = o.forces ? `<text x="20" y="22" font-size="12" fill="#2F6FDB" font-weight="800">파랑 = 당겨짐(인장 +)</text><text x="180" y="22" font-size="12" fill="#E04F3A" font-weight="800">빨강 = 밀림(압축 −)</text>` : '';
+  return svgWrap("0 0 340 245", s+legend);
+}
+
+function visJoint0(){
+  // 왼쪽 끝 절점 힘 그림
+  return svgWrap("0 0 330 200", arrowDefs()+`
+   <line x1="120" y1="140" x2="190" y2="19" stroke="#E04F3A" stroke-width="9" stroke-linecap="round"/>
+   <line x1="120" y1="140" x2="280" y2="140" stroke="#2F6FDB" stroke-width="7" stroke-linecap="round"/>
+   <circle cx="120" cy="140" r="9" fill="#fff" stroke="#2B2D42" stroke-width="3"/>
+   <line x1="120" y1="196" x2="120" y2="153" stroke="#2A9D8F" stroke-width="4" marker-end="url(#ahG)"/>
+   <text x="128" y="190" ${F} font-size="16" fill="#2A9D8F">바닥이 2P로 밀어 올림</text>
+   <line x1="160" y1="71" x2="135" y2="114" stroke="#E04F3A" stroke-width="3" marker-end="url(#ahO)"/>
+   <text x="200" y="58" ${F} font-size="15" fill="#E04F3A">비스듬 막대가</text>
+   <text x="200" y="76" ${F} font-size="15" fill="#E04F3A">점을 눌러줌 = 압축</text>
+   <line x1="150" y1="128" x2="200" y2="128" stroke="#2F6FDB" stroke-width="3" marker-end="url(#ah)"/>
+   <text x="205" y="122" ${F} font-size="15" fill="#2F6FDB">바닥 막대가 당김</text>
+   <path d="M150 140 A30 30 0 0 0 135 114" fill="none" stroke="#2B2D42" stroke-width="1.5"/>
+   <text x="152" y="122" font-size="12">60°</text>`);
+}
+
+function visJointA(){
+  return svgWrap("0 0 330 190", arrowDefs()+`
+   <rect x="20" y="120" width="290" height="22" rx="4" fill="#3D5A80"/>
+   <line x1="150" y1="120" x2="95" y2="25" stroke="#2F6FDB" stroke-width="16"/>
+   <line x1="180" y1="120" x2="235" y2="25" stroke="#E04F3A" stroke-width="16"/>
+   <line x1="78" y1="60" x2="55" y2="20" stroke="#2B2D42" stroke-width="3" marker-end="url(#ah)"/>
+   <line x1="275" y1="20" x2="252" y2="60" stroke="#2B2D42" stroke-width="3" marker-end="url(#ah)"/>
+   <text x="10" y="86" ${F} font-size="16" fill="#2F6FDB">N (당김)</text>
+   <text x="320" y="86" text-anchor="end" ${F} font-size="16" fill="#E04F3A">N (밀어 넣음)</text>
+   <circle cx="165" cy="128" r="30" fill="none" stroke="#EE6C4D" stroke-width="2.5" stroke-dasharray="6 4"/>
+   <text x="165" y="166" text-anchor="middle" ${F} font-size="15" fill="#3D5A80">하현재(bottom chord) · 두께 t를 정하자!</text>
+   <text x="165" y="184" text-anchor="middle" ${F} font-size="13" fill="#EE6C4D">점선 부분이 찌그러지거나 뚫릴 수 있어!</text>`);
+}
+
+/* ============ 장면 데이터 ============ */
+const SCENES=[
+{title:"놀이터 의자를 만들자", sub:"구조설계는 왜 하지?", steps:[
+ {t:'talk', vis:visBench, lines:[
+  "안녕! 나는 <span class='k'>볼트쌤</span>이야 🔩 오늘은 어려운 LRFD를 놀이처럼 배워 볼 거야.",
+  "우리가 놀이터에 <span class='k'>철로 된 긴 의자</span>를 만든다고 해 보자.",
+  "친구들이 우르르 올라가도 절대! 무너지면 안 되겠지?",
+  "그래서 만들기 전에 <span class='k'>“얼마나 무거운 게 올라올까?”</span>와 <span class='k'>“의자는 얼마나 버틸까?”</span>를 미리 계산해.",
+  "이게 바로 <b>구조설계</b>야. 그림에서 위에서 누르는 화살표가 무게, 아래에서 받치는 초록 화살표가 버티는 힘!"]},
+ {t:'q', vis:visBench, q:"의자가 버티는 힘이 올라가는 무게보다 작으면 어떻게 될까?",
+  opts:["아무 일 없어요","무너질 수 있어요"], two:false, a:1,
+  ok:"맞아! 버티는 힘이 무게를 못 이기면 무너져. 그래서 설계는 <span class='k'>버티는 힘 ≥ 무게</span>가 되게 만드는 일이야.",
+  hint:"줄다리기를 생각해 봐. 상대가 더 세게 당기면 우리 팀이 끌려가지? 의자도 무게한테 지면 무너져."}
+]},
+{title:"망가지는 방법은 여러 가지", sub:"한계상태 (Limit State)", steps:[
+ {t:'talk', vis:visModes, lines:[
+  "의자가 망가지는 방법은 하나가 아니야. 이렇게 <span class='k'>'여기까지 가면 끝!'</span> 하는 상태를 <b>한계상태</b>라고 불러.",
+  "① 코끼리가 한 번에 올라가서 와장창! → <b>극한한계상태</b> (Ultimate). 안전이 무너지는 거야.",
+  "② 작은 힘이 수만 번 톡톡톡 반복돼서 결국 금이 쩍! → <b>피로한계상태</b> (Fatigue). 크레인, 레일, 해양구조물에서 생겨.",
+  "③ 무너지진 않는데 너무 출렁여서 무서워! → <b>사용성한계상태</b> (Serviceability).",
+  "우리가 배우는 <span class='k'>LRFD는 주로 ① 와장창(극한한계상태)을 막기 위한 방법</span>이야. 꼭 기억해!"]},
+ {t:'q', vis:visModes, q:"크레인이 다니는 레일이 매일 수천 번 눌리다가 금이 갔어. 어떤 한계상태일까?",
+  opts:["극한 (Ultimate)","피로 (Fatigue)","사용성 (Serviceability)"], a:1,
+  ok:"정답! 작은 힘이라도 <span class='k'>반복</span>되면 피로. 클립을 계속 구부렸다 폈다 하면 결국 똑 부러지는 거랑 같아.",
+  hint:"힌트: 한 번에 큰 힘이 아니라 '수천 번 반복'이야. 클립을 계속 구부렸다 폈다 하면 어떻게 되지?"},
+ {t:'q', vis:visModes, q:"건물 바닥이 무너지진 않는데 걸을 때마다 출렁여서 사람들이 무서워해. 어떤 한계상태?",
+  opts:["극한 (Ultimate)","피로 (Fatigue)","사용성 (Serviceability)"], a:2,
+  ok:"맞아! 안 무너져도 <span class='k'>쓰기 불편하면</span> 사용성 한계상태야.",
+  hint:"무너졌나? 아니야. 금이 갔나? 아니야. 그냥 '쓰기 불편'하지? 사용하기에 문제 = 사용○"},
+ {t:'q', vis:visModes, q:"LRFD가 주로 막으려고 하는 건 뭘까?",
+  opts:["와장창 – 극한한계상태","출렁출렁 – 사용성한계상태","쩍 – 피로한계상태"], a:0,
+  ok:"딩동댕! LRFD = <span class='k'>와장창 방지 계산법</span>. 그리고 피로·사용성은 일반 건물에선 검토 안 하는 경우가 많아.",
+  hint:"LRFD는 '안전'을 지키는 계산법이야. 안전이 무너지는 건 셋 중 어떤 거였지?"},
+ {t:'talk', vis:visSteelFail, lines:[
+  "하나 더! 철(강재)이 와장창 망가지는 모습은 크게 세 가지야.",
+  "<b>항복</b>: 엿가락처럼 쭉~ 늘어나서 원래대로 안 돌아와.",
+  "<b>파단</b>: 뚝! 하고 끊어져.",
+  "<b>좌굴</b>: 가늘고 긴 막대를 위에서 누르면 옆으로 휘청 꺾이지? 그거야.",
+  "그래서 철 부재 하나에도 <span class='k'>망가지는 방법(한계상태)이 여러 개</span> 있는 거야."]},
+ {t:'q', vis:visSteelFail, q:"스파게티 면 하나를 세워서 위에서 꾹 누르면 옆으로 휘면서 꺾여. 이건?",
+  opts:["항복","파단","좌굴"], a:2,
+  ok:"정답! 가늘고 긴 게 눌려서 옆으로 휘청 = <span class='k'>좌굴</span>.",
+  hint:"늘어난 것도, 끊어진 것도 아니고 '옆으로 휘청' 꺾였지?"}
+]},
+{title:"걱정해서 부풀리기", sub:"하중계수 · 하중조합 · 소요강도", steps:[
+ {t:'talk', vis:visLoadFactor, lines:[
+  "이번엔 <span class='k'>무게(하중)</span> 이야기야. 의자에 친구가 몇 명 올라올지 정확히 알 수 있을까? 몰라!",
+  "그래서 <b>“혹시 더 무거우면 어떡해?”</b> 하고 일부러 부풀려서 계산해. 이 부풀리는 숫자가 <b>하중계수</b>야.",
+  "<b>D (고정하중)</b> = 의자 자기 몸무게. 늘 똑같으니까 <span class='k'>조금만</span> 부풀려 → ×1.2",
+  "<b>L (활하중)</b> = 올라타는 친구들. 왔다 갔다 해서 예측이 어려우니까 <span class='k'>많이</span> 부풀려 → ×1.6",
+  "의자 몸무게만 있는 상황도 걱정해야 하니까 <span class='eq'>1.4D</span> 시나리오도 있어.",
+  "이런 걱정 시나리오들을 <b>하중조합</b>이라고 해. 전부 계산해서 <span class='k'>제일 무거운 것</span>을 골라. 그게 <b>소요강도</b>(필요한 힘)야!"]},
+ {t:'q', q:"의자 몸무게 D = 300, 친구들 L = 75야. 시나리오 ① <span class='eq'>1.4D</span>는 얼마일까?",
+  opts:["400","420","440"], a:1,
+  ok:"<div class='calc'><div>1.4 × 300</div><div>= 420 ✅</div></div>300을 1.4배 부풀렸어!",
+  hint:"1 × 300 = 300, 0.4 × 300 = 120. 둘을 더하면?"},
+ {t:'q', q:"시나리오 ② <span class='eq'>1.2D + 1.6L</span>은 얼마일까? (D = 300, L = 75)",
+  opts:["435","480","375"], a:1,
+  ok:"<div class='calc'><div>1.2 × 300 = 360 (의자 몸무게 부풀림)</div><div>1.6 × 75 = 120 (친구들 부풀림)</div><div>360 + 120 = 480 ✅</div></div>",
+  hint:"하나씩 하자! 1.2 × 300 = 360이야. 그다음 1.6 × 75 = 120. 이제 더해 봐."},
+ {t:'q', q:"시나리오 ①은 420, ②는 480이야. 소요강도로 뭘 골라야 할까?",
+  opts:["420 (작은 거)","480 (큰 거)","둘의 평균 450"], a:1,
+  ok:"맞아! <span class='k'>가장 무거운 걱정</span>을 견뎌야 다른 상황도 다 견딜 수 있어. 소요강도 = 480!",
+  hint:"우산을 고를 때 가랑비용이 아니라 소나기용을 고르면 둘 다 막을 수 있지? 더 센 쪽을 골라."},
+ {t:'q', q:"왜 친구들(L)에는 의자 몸무게(D)보다 더 큰 숫자 1.6을 곱할까?",
+  opts:["친구들은 왔다 갔다 해서 예측이 어려우니까","친구들이 의자보다 가벼우니까","그냥 정해진 숫자라서"], a:0,
+  ok:"정확해! <span class='k'>잘 모르는 것일수록 더 많이 걱정</span>해서 크게 부풀리는 거야.",
+  hint:"의자 몸무게는 저울로 재면 딱 나와. 그런데 내일 몇 명이 올라올지는 알 수 있을까?"}
+]},
+{title:"겸손하게 깎기", sub:"공칭강도 · 저항계수 φ · 설계강도", steps:[
+ {t:'talk', lines:[
+  "이번엔 반대편, <span class='k'>의자가 얼마나 버티는지</span>야.",
+  "과학자들이 실험실에서 진짜 철을 <b>부숴 보고</b>, 컴퓨터로도 계산해서 “이만큼은 버틴다!” 하는 공식을 만들었어.",
+  "그 공식으로 예측한 힘이 <b>공칭강도</b>야. ‘이름표에 적힌 힘’이라고 생각하면 돼.",
+  "그런데 공장에서 만든 철이 살짝 약할 수도, 용접이 살짝 삐뚤 수도 있잖아?",
+  "그래서 공칭강도에 <b>1보다 작거나 같은 숫자 φ(파이)</b>를 곱해서 <span class='k'>겸손하게 깎아</span>. 이게 <b>저항계수</b>야.",
+  "<span class='eq'>설계강도 = φ × 공칭강도</span> ← 이게 우리가 믿고 쓰는 ‘진짜 버티는 힘’이야!"]},
+ {t:'q', q:"이름표에 적힌 힘(공칭강도)이 100이고 φ = 0.8이야. 설계강도는?",
+  opts:["80","100","125"], a:0,
+  ok:"<div class='calc'><div>0.8 × 100 = 80 ✅</div></div>100이라고 적혀 있어도 겸손하게 80만 믿는 거야.",
+  hint:"φ는 ‘깎는’ 숫자야. 100보다 커질 수 있을까? 0.8 × 100 = ?"},
+ {t:'talk', vis:()=>visChain([{name:'찌그러짐',v:600},{name:'뚫림',v:450},{name:'끊어짐',v:700}]), lines:[
+  "아까 망가지는 방법이 여러 개라고 했지? 그럼 방법마다 설계강도를 하나씩 계산해.",
+  "그런데 <b>사슬은 가장 약한 고리에서 끊어져!</b> 다른 고리가 아무리 튼튼해도 소용없어.",
+  "그래서 여러 설계강도 중 <span class='k'>가장 작은 값</span>이 그 부재의 진짜 설계강도야."]},
+ {t:'q', vis:()=>visChain([{name:'찌그러짐',v:600},{name:'뚫림',v:450},{name:'끊어짐',v:700}]), q:"이 부재의 설계강도는 몇 kN일까?",
+  opts:["700 (가장 튼튼)","600","450 (가장 약함)"], a:2,
+  visOk:()=>visChain([{name:'찌그러짐',v:600},{name:'뚫림',v:450},{name:'끊어짐',v:700}],1),
+  ok:"정답! 450에서 먼저 ‘뚫림’으로 망가지니까 <span class='k'>설계강도 = 450 kN</span>.",
+  hint:"사슬을 잡아당기면 어느 고리가 먼저 끊어질까? 가장 약한 고리!"}
+]},
+{title:"저울로 최종 판정", sub:"설계강도 ≥ 소요강도", steps:[
+ {t:'talk', vis:()=>visScale(480,520,false), lines:[
+  "이제 마지막 비법! 저울에 둘을 올려 보자.",
+  "왼쪽: <span class='k'>가장 무거운 걱정 무게</span> = 소요강도 (하중조합 중 최댓값)",
+  "오른쪽: <span class='k'>가장 약한 버티는 힘</span> = 설계강도 (한계상태 중 최솟값)",
+  "<b>설계강도 ≥ 소요강도</b> 이면 안전 OK! 이 한 문장만 외우면 LRFD는 끝이야. 같이 읽어 보자. <b>“약한 힘이 무거운 걱정보다 크면 안전!”</b>"]},
+ {t:'q', vis:()=>visScale(480,520,false), visOk:()=>visScale(480,520,true), q:"소요강도 480 kN, 설계강도는 min(600, 520) = 520 kN. 안전할까?",
+  opts:["OK","NG"], two:true, a:0,
+  ok:"520 ≥ 480 이니까 <span class='k'>안전 OK!</span>",
+  hint:"버티는 힘 520과 걱정 무게 480 중 누가 더 크지?"},
+ {t:'q', vis:()=>visScale(500,450,false), visOk:()=>visScale(500,450,true), q:"소요강도 500 kN, 설계강도는 min(700, 450) = 450 kN. 안전할까?",
+  opts:["OK","NG"], two:true, a:1,
+  ok:"700이 커 보여도 소용없어! 가장 약한 450 < 500 이니까 <span class='k'>위험 NG</span>.",
+  hint:"함정 조심! 700 말고 가장 약한 고리인 450으로 비교해야 해."},
+ {t:'q', vis:()=>visScale(300,300,false), visOk:()=>visScale(300,300,true), q:"소요강도 300 kN, 설계강도 300 kN. 딱 같으면?",
+  opts:["OK","NG"], two:true, a:0,
+  ok:"기호가 <span class='k'>≥ (크거나 같다)</span>니까 같아도 OK! 이미 하중은 부풀리고 저항은 깎아서 여유가 숨어 있거든.",
+  hint:"조건은 ‘설계강도 ≥ 소요강도’야. ≥ 는 ‘크거나 같다’는 뜻!"}
+]},
+{title:"우리나라 설계기준", sub:"KDS · LRFD vs ASD", steps:[
+ {t:'talk', lines:[
+  "LRFD의 이름을 풀어 보면 <b>L</b>oad and <b>R</b>esistance <b>F</b>actor <b>D</b>esign, <span class='k'>하중저항계수설계법</span>이야.",
+  "하중(Load)은 <b>계수로 부풀리고</b>, 저항(Resistance)은 <b>계수로 깎는</b> 방법이라는 뜻이지. 이름에 다 들어 있어!",
+  "옛날 방식으로는 <b>ASD</b>(허용응력설계법)도 있어. 이건 버티는 힘을 안전율로 한 번에 나눠서 비교하는 방법이야.",
+  "우리나라 건축구조기준은 <b>KDS 41</b>이고, 강구조 기준 <b>KDS 41 30은 LRFD만</b> 써.",
+  "그리고 이 기준들은 미국 기준(<b>ASCE 7, AISC 360, AISC 341</b>)을 많이 따라 만들었어.",
+  "왜 이렇게 복잡하게 하냐고? 하중도 강도도 <span class='k'>불확실</span>하니까, 확률로 ‘무너질 가능성’을 아주 작게 만드는 <b>신뢰도 기반 설계</b>라서 그래."]},
+ {t:'q', q:"우리나라 강구조 설계기준 KDS 41 30이 쓰는 설계법은?",
+  opts:["ASD만","LRFD만","둘 다 마음대로"], a:1,
+  ok:"맞아! <span class='k'>KDS 41 30 = LRFD만</span>.",
+  hint:"오늘 우리가 열심히 배우고 있는 바로 그 방법이야!"},
+ {t:'q', q:"LRFD에서 L과 R은 각각 무엇일까?",
+  opts:["Load(하중)와 Resistance(저항)","Length(길이)와 Rod(막대)","Limit(한계)와 Rule(규칙)"], a:0,
+  ok:"정답! <span class='k'>하중은 부풀리고(L), 저항은 깎고(R)</span>. 이름에 방법이 다 들어 있지.",
+  hint:"무게 = 하중 = Load, 버티는 힘 = 저항 = Resistance"}
+]},
+{title:"보스 1: 트러스 부재력", sub:"PE 4.1 · 절점법", steps:[
+ {t:'talk', vis:()=>visTruss(), lines:[
+  "이제 진짜 문제다! 🔥 이건 막대를 <b>삼각형</b>으로 엮어 만든 다리, <b>트러스</b>야.",
+  "트러스 막대들은 딱 두 가지만 해. <span class='c'>밀리거나(압축)</span> <span class='t'>당겨지거나(인장)</span>.",
+  "위쪽 점 4곳에 무게 P가 하나씩, 그러니까 다 합치면 <b>4P</b>가 눌러."]},
+ {t:'q', vis:()=>visTruss({react:'?'}), visOk:()=>visTruss({react:'2P'}), q:"양쪽 끝 받침이 무게를 나눠 들어. 한쪽이 드는 힘(반력)은?",
+  opts:["P","2P","4P"], a:1,
+  ok:"맞아! 왼쪽·오른쪽 똑같이 생겼으니까 <span class='k'>4P ÷ 2 = 2P</span>씩. 무거운 상자를 둘이 같이 드는 거랑 같아.",
+  hint:"상자 무게가 4P이고, 친구 둘이 양쪽에서 똑같이 들고 있어. 한 명은 얼마?"},
+ {t:'talk', vis:visJoint0, lines:[
+  "이제 <b>절점법</b>! 원리는 하나야. <span class='k'>한 점에 모인 힘들은 서로 비겨야 그 점이 가만히 있어.</span>",
+  "<b>위아래 힘의 합 = 0</b>, <b>좌우 힘의 합 = 0</b>. 이 두 개만 쓰면 돼.",
+  "왼쪽 끝 점을 보자. 바닥이 <b>2P로 위로</b> 밀어 올려.",
+  "점이 하늘로 날아가지 않으려면 비스듬한 막대가 점을 <b>아래로 꾹</b> 눌러줘야 해."]},
+ {t:'q', vis:visJoint0, q:"점을 아래로 꾹 ‘눌러 주는’ 비스듬 막대(단부 사재)는 밀릴까, 당겨질까?",
+  opts:["당겨진다 (인장)","밀린다 (압축)"], a:1,
+  ok:"정답! 점을 미는 막대는 자기도 양쪽에서 <span class='c'>밀리고 있어 = 압축</span>.",
+  hint:"손바닥으로 벽을 밀면 내 팔은 눌리지? 점을 미는 막대도 눌리고 있는 거야."},
+ {t:'talk', vis:visJoint0, lines:[
+  "얼마나 세게 눌러야 할까? 막대가 비스듬(60°)해서 힘의 일부만 위아래 방향으로 써.",
+  "위아래로 쓰는 몫은 <span class='eq'>sin60° = 0.866</span>, 약 87%야.",
+  "위아래 몫이 2P가 되어야 하니까 <span class='eq'>막대 힘 = 2P ÷ 0.866 = 2.31P</span> (압축)",
+  "그런데 비스듬 막대가 누르면 점을 <b>왼쪽으로도</b> 살짝 밀어. 그래서 바닥 막대가 <b>오른쪽으로 당겨서</b> 비겨 줘.",
+  "그 크기는 <span class='eq'>2P × cot60° = 2P × 0.577 = 1.15P</span> (인장)"]},
+ {t:'q', vis:visJoint0, q:"정리 퀴즈! 왼쪽 끝 비스듬 막대 힘은?",
+  opts:["2P","2.31P 압축","1.15P 인장"], a:1,
+  ok:"<div class='calc'><div>2P ÷ 0.866</div><div>= 2.31P (압축) ✅</div></div>",
+  hint:"위아래 몫(0.866)이 2P가 돼야 하니까, 전체는 2P보다 커야 해. 2P ÷ 0.866 = ?"},
+ {t:'talk', vis:()=>visTruss({forces:true}), lines:[
+  "이렇게 점을 하나씩 옮겨 가며 풀면 모든 막대가 나와! 그림 숫자는 P의 몇 배인지야.",
+  "<span class='c'>빨강 = 압축</span>, <span class='t'>파랑 = 인장</span>, 점선 = 0. 굵을수록 힘이 커.",
+  "<b>윗줄(상현)</b>은 전부 빨강, <b>아랫줄(하현)</b>은 전부 파랑이지? 다리가 아래로 살짝 휘면 <span class='k'>윗면은 눌리고 아랫면은 늘어나</span>거든. 스펀지를 구부려 보면 똑같아!",
+  "가운데로 갈수록 휘는 힘이 커서 상현·하현 중앙이 2.31P로 가장 커."]},
+ {t:'q', vis:()=>visTruss({forces:true,hi:[10,11]}), q:"한가운데 두 사재(주황색)의 힘은 얼마일까?",
+  opts:["2.31P","1.15P","0 (힘이 없음)"], a:2,
+  ok:"맞아! 좌우가 완전히 대칭이라 가운데 사재는 <span class='k'>0, 놀고 있는 막대</span>야. 그래도 모양 유지에 필요해서 빼면 안 돼!",
+  hint:"그림에서 가운데 두 막대는 점선이었어. 점선은 무슨 뜻이었지?"},
+ {t:'q', vis:()=>visTruss({forces:true}), q:"마지막! 트러스 윗줄(상현) 막대들은 대체로?",
+  opts:["밀린다 (압축)","당겨진다 (인장)"], a:0,
+  ok:"정답! 위는 <span class='c'>압축</span>, 아래는 <span class='t'>인장</span>. 보스 1 클리어! 🎉",
+  hint:"스펀지를 아래로 휘게 누르면 윗면은 쪼그라들고 아랫면은 늘어나."}
+]},
+{title:"보스 2: 접합부 두께 정하기", sub:"PE 4.2 · LRFD 실전", steps:[
+ {t:'talk', vis:()=>visTruss({jointA:true}), lines:[
+  "최종 보스! 🔥 왼쪽에서 두 번째 아래 점, <b>Joint A</b>를 설계할 거야.",
+  "여기엔 비스듬 막대 두 개가 K자로 붙어. 보스 1에서 구한 대로 두 막대 힘은 <span class='eq'>N = P ÷ 0.866 = 1.155P</span>",
+  "목표는 아래 막대(<b>하현재, bottom chord</b>)의 <span class='k'>두께 t</span>를 정하는 거야. 너무 얇으면 망가지고, 너무 두꺼우면 철이 아까워!"]},
+ {t:'q', q:"먼저 걱정 무게! D일 때 P = 300 kN, L일 때 P = 75 kN. 하중조합 1.4D와 1.2D+1.6L 중 더 큰 P는?",
+  opts:["420 kN","480 kN","375 kN"], a:1,
+  ok:"<div class='calc'><div>1.4 × 300 = 420</div><div>1.2 × 300 + 1.6 × 75 = 360 + 120 = 480</div><div>더 큰 쪽 → P = 480 kN ✅</div></div>장면 3에서 했던 거랑 똑같지?",
+  hint:"장면 3에서 똑같은 숫자로 계산했었어! 더 무거운 걱정을 골라."},
+ {t:'q', q:"그럼 막대 힘 Nu = 480 ÷ 0.866 은?",
+  opts:["415.7 kN","554.3 kN","600 kN"], a:1,
+  ok:"<div class='calc'><div>480 ÷ 0.866</div><div>= 554.3 kN ✅ ← 이게 소요강도!</div></div>",
+  hint:"0.866으로 나누면 원래보다 커져. 480보다 크면서 600보다 작은 건?"},
+ {t:'talk', vis:visJointA, lines:[
+  "이 접합부가 망가지는 방법(한계상태)은 두 가지야.",
+  "① <b>소성화</b>: 하현재가 눌려서 찌그러짐. <span class='eq'>공칭 N = 20 × fy × t²</span>, φ = 1.0",
+  "② <b>펀칭전단</b>: 막대가 하현재를 송곳처럼 뚫음. <span class='eq'>공칭 N = 300mm × fy × t</span>, φ = 0.8",
+  "철의 힘 fy = 275 MPa. φ까지 곱해서 정리하면 (kN 단위)",
+  "① 소성화 설계강도 = <span class='eq'>5.5 × t²</span> &nbsp; ② 펀칭 설계강도 = <span class='eq'>66 × t</span>",
+  "두께 t가 두꺼울수록 둘 다 튼튼해져. 다음 화면에서 슬라이더로 직접 찾아보자!"]},
+ {t:'slider'},
+ {t:'talk', vis:visJointA, lines:[
+  "이제 정확히 계산해 보자. 둘 다 <span class='k'>설계강도 ≥ 554.3 kN</span>이어야 해.",
+  "① 소성화: <span class='eq'>5500 t² ≥ 554,300</span> → <span class='eq'>t² ≥ 100.8</span> → <b>t ≥ 10.04 mm</b>",
+  "② 펀칭: <span class='eq'>66,000 t ≥ 554,300</span> → <b>t ≥ 8.40 mm</b>",
+  "둘 다 만족해야 하니까 <span class='k'>더 두꺼운 10.04 mm</span>! 실제로는 시중에 파는 규격 두께(예: 12 mm)를 써.",
+  "왜 더 두꺼운 쪽을 고르냐고? 얇은 8.4 mm로 하면 ‘소성화’라는 <b>약한 고리</b>가 먼저 끊어지거든. 장면 4의 사슬이랑 같은 이야기야!"]},
+ {t:'q', vis:visJointA, q:"그래서 이 접합부를 결정(지배)하는 한계상태는?",
+  opts:["소성화 (찌그러짐)","펀칭전단 (뚫림)"], a:0,
+  ok:"정답! 같은 두께에서 더 약한 쪽 = <span class='k'>소성화가 지배</span>, t ≥ 10.04 mm. 보스 2 클리어! 🏆",
+  hint:"더 두꺼운 두께를 요구한 쪽이 ‘더 약한 고리’야. 10.04 mm를 요구한 건 누구였지?"}
+]},
+{title:"최종 퀴즈", sub:"OX 5문제 + 빈칸 5문제", steps:[
+ {t:'q', tag:"OX 1", q:"피로한계상태는 작은 힘이 여러 번 반복돼서 생긴다.", opts:["O","X"], two:true, a:0, ok:"O! 클립 구부리기처럼 반복이 핵심.", hint:"크레인, 레일, 클립 구부리기를 떠올려 봐."},
+ {t:'q', tag:"OX 2", q:"공칭강도에 φ를 곱하면 소요강도가 된다.", opts:["O","X"], two:true, a:1, ok:"X! φ를 곱하면 <span class='k'>설계강도</span>. 소요강도는 하중 쪽 이름이야.", hint:"φ는 ‘버티는 힘’ 쪽 숫자였어. 버티는 힘 쪽 이름은?"},
+ {t:'q', tag:"OX 3", q:"여러 하중조합 중 가장 작은 값을 소요강도로 쓴다.", opts:["O","X"], two:true, a:1, ok:"X! 걱정은 <span class='k'>가장 큰 값</span>으로.", hint:"우산은 소나기용으로 골랐지?"},
+ {t:'q', tag:"OX 4", q:"망가지는 방법이 여러 개면, 설계강도는 그중 가장 작은 값이다.", opts:["O","X"], two:true, a:0, ok:"O! 사슬은 가장 약한 고리에서 끊어져.", hint:"사슬!"},
+ {t:'q', tag:"OX 5", q:"우리나라 강구조 기준 KDS 41 30은 ASD를 쓴다.", opts:["O","X"], two:true, a:1, ok:"X! KDS 41 30은 <span class='k'>LRFD만</span>.", hint:"오늘 배운 방법의 이름은?"},
+ {t:'q', tag:"빈칸 1", q:"무너지진 않지만 너무 출렁여서 쓰기 불편한 상태 = ( ) 한계상태", opts:["Ultimate","Fatigue","Serviceability"], a:2, ok:"Serviceability, 사용성!", hint:"‘사용’하기 불편해."},
+ {t:'q', tag:"빈칸 2", q:"실험으로 만든 공식으로 예측한 ‘이름표 힘’ = ( )강도", opts:["공칭","설계","소요"], a:0, ok:"공칭강도! 여기에 φ를 곱하면 설계강도.", hint:"이름표(명목)에 적힌 힘."},
+ {t:'q', tag:"빈칸 3", q:"하중은 부풀리고 저항은 깎는 설계법 = ( )", opts:["LRFD","ASD","KDS"], a:0, ok:"LRFD, 하중저항계수설계법!", hint:"Load and Resistance Factor Design"},
+ {t:'q', tag:"빈칸 4", q:"강재의 대표 파괴모드: 항복, 파단, ( )", opts:["좌굴","피로","부식"], a:0, ok:"좌굴! 스파게티 면 휘청.", hint:"가늘고 긴 막대를 누르면 옆으로 휘청."},
+ {t:'q', tag:"빈칸 5", q:"안전 조건: 설계강도 ( ) 소요강도", opts:["≥","≤","≠"], two:true, a:0, ok:"≥ ! 약한 힘이 무거운 걱정보다 크거나 같으면 안전.", hint:"버티는 힘이 이겨야 해."}
+]}
+];
+
+/* ============ 상태 ============ */
+const TOTALQ = SCENES.reduce((n,s)=>n+s.steps.filter(x=>x.t==='q'||x.t==='slider').length,0);
+let st = {view:'home', sc:0, sp:0, line:0, stars:0, got:{}, tries:0, solved:false, done:{}, menu:false, sliderT:6};
+function save(){try{localStorage.setItem('lrfd-game',JSON.stringify({got:st.got,done:st.done}))}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem('lrfd-game')||'null');if(d){st.got=d.got||{};st.done=d.done||{};st.stars=Object.keys(st.got).length}}catch(e){}}
+load();
+
+const app=document.getElementById('app');
+function esc(s){return s}
+
+function header(){
+  const sc=SCENES[st.sc]; const n=sc.steps.length;
+  const pct = Math.round(((st.sp)+(st.solved?1:0))/n*100);
+  return `<header><button class="hbtn" onclick="openMenu()">☰</button>
+    <div class="htitle">${st.sc+1}. ${sc.title}<small>${sc.sub}</small></div>
+    <div class="stars">⭐ ${st.stars}</div></header>
+    <div class="prog"><i style="width:${pct}%"></i></div>`;
+}
+
+function render(){
+  if(st.view==='home') return renderHome();
+  if(st.view==='end') return renderEnd();
+  const step=SCENES[st.sc].steps[st.sp];
+  let h=header();
+  if(step.t==='talk') h+=renderTalk(step);
+  else if(step.t==='q') h+=renderQ(step);
+  else if(step.t==='slider') h+=renderSlider();
+  app.innerHTML=h+(st.menu?menuHTML():'');
+  if(step.t==='slider') bindSlider();
+  window.scrollTo({top:0});
+}
+
+function renderHome(){
+  let list=SCENES.map((s,i)=>`<button class="scn" onclick="goScene(${i})"><span class="n">${i+1}</span><span><b>${s.title}</b><br><small style="color:#7a7f95">${s.sub}</small></span>${st.done[i]?'<span class="done">✔</span>':''}</button>`).join('');
+  app.innerHTML=`<div class="home">
+   <div class="talk" style="margin-top:14px"><div class="mascot">🔩</div><div class="bubble">안녕! 나는 <span class="k">볼트쌤</span>이야. 강구조 설계의 핵심 <b>LRFD</b>를 놀이터 의자 만들기로 배워 보자!</div></div>
+   <h1>볼트쌤의<br>LRFD 놀이터</h1>
+   <div class="sub">하중은 걱정해서 크게, 버티는 힘은 겸손하게 작게.<br>개념 6단계 → 보스 문제 2개 → 최종 퀴즈</div>
+   <button class="btn go" onclick="goScene(0)">시작하기 ▶</button>
+   <div class="scenes">${list}</div>
+   <div class="credit">강구조설계 LRFD 단원 (Practice Example 4) 기반<br>건축공학전공 곽지예 · AI(Claude) 활용 캡스톤 과제</div>
+  </div>`+(st.menu?menuHTML():'');
+}
+
+function renderTalk(step){
+  const lines=step.lines.slice(0,st.line+1).map((l,i)=>`<p class="${i===st.line?'new':''}">${l}</p>`).join('');
+  const last = st.line>=step.lines.length-1;
+  return `${step.vis?`<div class="vis">${step.vis()}</div>`:''}
+   <div class="talk"><div class="mascot">🔩</div><div class="bubble">${lines}</div></div>
+   <button class="btn ${last?'go':''}" onclick="nextLine()">${last?'알겠어! 다음 ▶':'계속 ▼'}</button>`;
+}
+
+let qState={picked:[],fb:null};
+function renderQ(step){
+  const vis = (st.solved && step.visOk) ? step.visOk : step.vis;
+  const opts=step.opts.map((o,i)=>{
+    let cls='opt'; if(qState.picked.includes(i)) cls+= i===step.a?' right':' wrong';
+    return `<button class="${cls}" ${st.solved?'disabled':''} onclick="pick(${i})">${o}</button>`}).join('');
+  let fb='';
+  if(qState.fb==='ok') fb=`<div class="fb ok new"><b>${st.tries===1?'⭐ 한 번에 정답!':'좋아, 정답!'}</b><br>${step.ok}</div><button class="btn go" onclick="nextStep()">다음 ▶</button>`;
+  else if(qState.fb==='no') fb=`<div class="fb no new"><b>괜찮아, 다시 해 보자 💪</b><br>${step.hint}</div>`;
+  return `${vis?`<div class="vis">${vis()}</div>`:''}
+   <div class="qtag">${step.tag||'🧩 확인 문제'}</div><div class="q">${step.q}</div>
+   <div class="opts ${step.two?'two':''}">${opts}</div>${fb}`;
+}
+
+function renderSlider(){
+  return `<div class="vis">${visJointA()}</div>
+   <div class="qtag">🎚️ 미션</div>
+   <div class="q">두 막대가 모두 <span style="color:var(--ok)">초록색</span>이 되는 <b>가장 얇은</b> 두께를 찾아! (검은 선 = 소요강도 554.3 kN)</div>
+   <div class="slider">
+     <div class="tval" id="tv"></div>
+     <input type="range" min="5" max="14" step="0.5" id="tr" value="${st.sliderT}" ${st.solved?'disabled':''}>
+     <div class="barrow"><div class="lab"><span>① 소성화 5.5t²</span><b id="v1"></b></div><div class="bar"><i id="b1"></i><span class="nu" id="n1"></span></div></div>
+     <div class="barrow"><div class="lab"><span>② 펀칭전단 66t</span><b id="v2"></b></div><div class="bar"><i id="b2"></i><span class="nu" id="n2"></span></div></div>
+     <div class="nulab">세로 검은 선 = Nu 554.3 kN</div>
+   </div>
+   <div id="sfb">${st.solved?sliderOk():''}</div>
+   ${st.solved?'':`<button class="btn go" onclick="checkSlider()">이 두께로 결정!</button>`}`;
+}
+const NU=554.3, MAXB=1000;
+function bindSlider(){
+  const r=document.getElementById('tr');
+  const upd=()=>{
+    const t=+r.value; st.sliderT=t;
+    const a=5.5*t*t, b=66*t;
+    document.getElementById('tv').innerHTML=`t = ${t.toFixed(1)} <small>mm</small>`;
+    document.getElementById('v1').textContent=a.toFixed(1)+' kN';
+    document.getElementById('v2').textContent=b.toFixed(1)+' kN';
+    [['b1',a],['b2',b]].forEach(([id,v])=>{const e=document.getElementById(id);e.style.width=Math.min(100,v/MAXB*100)+'%';e.style.background=v>=NU?'var(--ok)':'var(--no)'});
+    ['n1','n2'].forEach(id=>document.getElementById(id).style.left=(NU/MAXB*100)+'%');
+  };
+  r.addEventListener('input',upd); upd();
+}
+function sliderOk(){return `<div class="fb ok new"><b>${st.tries===1?'⭐ 한 번에 찾았어!':'찾았다!'}</b><br>10.0 mm에서는 소성화가 550 kN으로 554.3에 살짝 모자라고, <span class="k">10.5 mm</span>에서 둘 다 통과! 정답은 10과 10.5 사이 어딘가야. 다음 화면에서 정확히 계산해 보자.</div><button class="btn go" onclick="nextStep()">다음 ▶</button>`}
+function checkSlider(){
+  const t=st.sliderT, ok=x=>5.5*x*x>=NU && 66*x>=NU;
+  st.tries++;
+  const f=document.getElementById('sfb');
+  if(ok(t) && !ok(t-0.5)){ st.solved=true; if(st.tries===1) star(); save(); render(); return; }
+  let msg;
+  if(!ok(t)){ const red=[]; if(5.5*t*t<NU) red.push('① 소성화'); if(66*t<NU) red.push('② 펀칭전단'); msg=`아직 <b>${red.join(', ')}</b> 막대가 빨간색이야! 빨간 건 버티는 힘이 걱정 무게보다 작다는 뜻. 두께를 조금 더 늘려 봐.`; }
+  else msg=`안전하긴 해! 그런데 <b>더 얇게</b> 해도 둘 다 초록일 수 있어. 철이 아까우니까 한 칸씩 줄여 봐.`;
+  f.innerHTML=`<div class="fb no new"><b>거의 다 왔어 💪</b><br>${msg}</div>`;
+}
+
+function renderEnd(){
+  const pct=Math.round(st.stars/TOTALQ*100);
+  app.innerHTML=`<div class="home">
+   <div class="big">🏆</div>
+   <h1 style="text-align:center;margin-top:0">LRFD 정복 완료!</h1>
+   <div class="big" style="font-size:30px">⭐ ${st.stars} / ${TOTALQ}</div>
+   <div class="sub" style="text-align:center">한 번에 맞힌 문제 수 (${pct}%)</div>
+   <div class="sum"><h4>🧒 초등학생 버전</h4>무게는 걱정해서 <b>크게</b>, 버티는 힘은 겸손하게 <b>작게</b> 계산하고, 그래도 <b>가장 약한 버티는 힘이 가장 무거운 걱정보다 크면 안전!</b></div>
+   <div class="sum"><h4>🎓 대학생 버전</h4>LRFD는 하중계수로 증폭한 하중조합들의 최대 부재력(소요강도)이, 한계상태별 공칭강도에 저항계수 φ를 곱한 값 중 최솟값(설계강도) 이하인지 확인하는 신뢰도 기반 설계법이다. <span class="eq">φRn,min ≥ Ru,max</span></div>
+   <div class="sum"><h4>📌 PE 4.2 답</h4>Pu = 480 kN → Nu = 554.3 kN → 소성화 t ≥ 10.04 mm, 펀칭 t ≥ 8.40 mm → <b>소성화 지배, t ≥ 10.04 mm</b> (규격 12 mm 등)</div>
+   <button class="btn go" onclick="restart()">처음부터 다시 ↺</button>
+   <button class="btn alt" onclick="st.view='home';render()">장면 목록</button>
+   <div class="credit">건축공학전공 곽지예 · AI(Claude) 활용 캡스톤 과제</div></div>`;
+}
+
+function menuHTML(){
+  const list=SCENES.map((s,i)=>`<button class="scn" onclick="goScene(${i})"><span class="n">${i+1}</span><span><b>${s.title}</b><br><small style="color:#7a7f95">${s.sub}</small></span>${st.done[i]?'<span class="done">✔</span>':''}</button>`).join('');
+  return `<div class="overlay" onclick="if(event.target===this)closeMenu()"><div class="sheet"><h3>장면 고르기</h3>
+   <div class="scenes">${list}</div>
+   <button class="btn alt" onclick="st.menu=false;st.view='home';render()">🏠 처음 화면</button></div></div>`;
+}
+
+/* ============ 동작 ============ */
+function resetStep(){st.line=0;st.tries=0;st.solved=false;qState={picked:[],fb:null};st.sliderT=6}
+function goScene(i){st.menu=false;st.view='play';st.sc=i;st.sp=0;resetStep();render()}
+function openMenu(){st.menu=true;render()}
+function closeMenu(){st.menu=false;render()}
+function nextLine(){const s=SCENES[st.sc].steps[st.sp]; if(st.line<s.lines.length-1){st.line++;render()} else nextStep()}
+function nextStep(){
+  const sc=SCENES[st.sc];
+  if(st.sp<sc.steps.length-1){st.sp++;resetStep();render();return}
+  st.done[st.sc]=true; save();
+  if(st.sc<SCENES.length-1){st.sc++;st.sp=0;resetStep();render()} else {st.view='end';render()}
+}
+function pick(i){
+  const step=SCENES[st.sc].steps[st.sp];
+  if(st.solved||qState.picked.includes(i))return;
+  st.tries++; qState.picked.push(i);
+  if(i===step.a){st.solved=true;qState.fb='ok';if(st.tries===1)star();save()} else qState.fb='no';
+  render();
+}
+function star(){st.got[st.sc+'-'+st.sp]=1;st.stars=Object.keys(st.got).length}
+function restart(){st.stars=0;st.got={};st.done={};save();goScene(0)}
+render();
+</script>
+</body>
+</html>

@@ -143,8 +143,14 @@ footer{border-top:1px solid var(--line);padding:40px 0 36px;margin-top:8px}
 .foot .lk{display:flex;gap:18px;font-size:14px;color:var(--sub)}.foot .lk a:hover{color:var(--ink)}
 .copy{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
 .js .rise{transition:transform .6s cubic-bezier(.2,.7,.2,1)}.js .rise.down{transform:translateY(16px)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.shots figure{margin:0}.shots a{display:block}.shots img{width:100%;height:auto;display:block}
+.shots figcaption{font-size:12px;color:var(--sub);margin-top:6px;text-align:center;line-height:1.5}
+.btns.left{justify-content:flex-start}
+a.inl{font-weight:700;border-bottom:1px solid var(--line)}a.inl:hover{border-color:var(--ink)}
 @media (max-width:820px){.nav{display:none}}
 @media (max-width:640px){
+.shots{grid-template-columns:1fr 1fr}
  .wrap{padding:0 20px}section{padding:60px 0}section.first{padding-top:32px}
  h1{font-size:30px}h2{font-size:23px;margin-bottom:22px}.lead{font-size:16px}
  .meta{grid-template-columns:84px 1fr;font-size:14px;padding:18px}
@@ -282,7 +288,7 @@ footer{border-top:1px solid var(--line);padding:40px 0 36px;margin-top:8px}
       <div class="label">이어서 보기</div>
       <h2>다른 프로젝트</h2>
       <div class="pn">
-        <a href="../rest-area/"><small>← 이전</small><b>두 번 멈추는 휴게소</b></a>
+        <a href="../ai-apps/"><small>← 이전</small><b>AI 활용 프로젝트 — LRFD 놀이터 · 지예건설</b></a>
         <a class="nx" href="../winter-concrete/"><small>다음 →</small><b>발열팩 분말을 활용한 영하 환경 콘크리트의 수화 반응 촉진 연구</b></a>
       </div>
       <div class="btns">

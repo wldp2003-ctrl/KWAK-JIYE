@@ -56,9 +56,10 @@
     council: {t:'2025 건축학부 학생회장', p:[
       ['images/gallery/council/01.jpg','2025 건축학부 학생회 로고 ‘축(築)’'],
       ['images/gallery/council/02.jpg','학생회 로고 디자인'],
-      ['images/gallery/council/03.jpg','2025 공학 강연회 ‘건축을 말하다’ 포스터'],
-      ['images/gallery/council/04.jpg','신입생 OT 진행'],
-      ['images/gallery/council/05.jpg','신입생 OT 진행']]}
+      ['images/gallery/council/03.jpg','건축학부 학생회장 당선증 · 2024년 11월 26일'],
+      ['images/gallery/council/04.jpg','2025 공학 강연회 ‘건축을 말하다’ 포스터'],
+      ['images/gallery/council/05.jpg','신입생 OT 진행'],
+      ['images/gallery/council/06.jpg','신입생 OT 진행']]}
   };
   var dlg = document.getElementById('gal');
   if (dlg && dlg.showModal){
