@@ -14,6 +14,7 @@
 site/
  ├─ index.html          페이지 전체 (CSS·JS 포함, 외부 파일은 Google Fonts만 사용)
  ├─ images/profile.jpg  증명사진 (긴 변 800px, JPG 품질 85, 사진 정보(EXIF) 제거)
+ ├─ images/gallery/     활동 사진 (cm · schedule · intern · academy · council, 긴 변 1400px, EXIF 제거)
  ├─ projects/           프로젝트 상세 페이지 (각 폴더에 index.html + img/)
  │   ├─ cm-proposal/      광양 동호안 LNG 냉열 데이터센터 CM 제안서
  │   ├─ winter-concrete/  발열팩 분말 영하 환경 콘크리트 연구 (캡스톤)
@@ -30,7 +31,7 @@ site/
 | 2 | 관심 분야 | 건설사업관리(CM) · 공정관리 · 디지털 건설(OSC) |
 | 3 | 역량 | 리더십 · 책임감 · 건설사업관리 카드 3개 |
 | 4 | 이력 | 학력 2개 + 직책 4줄 번호 타임라인 |
-| 5 | 활동 | 분류 버튼(전체 / 공모전·대회 / 대외 / 교내) + 활동 9개 |
+| 5 | 활동 | 분류 버튼(전체 / 공모전·대회 / 대외 / 교내) + 활동 9개. 카메라 표시가 있는 활동을 누르면 사진 보기 창이 열림 |
 | 6 | 프로젝트 | 맥 창 모양 카드 4개 → 누르면 `projects/` 상세 페이지로 이동 |
 | 7 | 마무리 · 푸터 | next step 카드, 링크, 저작권 |
 
@@ -46,6 +47,7 @@ site/
 
 - 글자: `index.html`을 메모장이나 VS Code로 열어 해당 문장을 찾아 고칩니다.
 - 사진: `images/profile.jpg`를 같은 이름의 새 사진으로 바꿉니다(세로 사진, 긴 변 800px 정도 권장).
+- 활동 사진: `images/gallery/<폴더>/`에 사진을 넣고, `index.html` 아래쪽 스크립트의 `var G = {...}` 목록에 경로와 설명을 추가합니다. 수료증 사진의 생년월일은 가려 두었습니다.
 - 활동 추가: `<ul class="acts">` 안의 `<li class="act" ...>` 한 줄을 복사해 고칩니다.
   `data-c` 값은 `contest`(공모전·대회) / `ext`(대외) / `campus`(교내) 중 하나입니다.
 

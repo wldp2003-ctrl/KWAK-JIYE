@@ -182,6 +182,70 @@ h2{font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1.3;margin-
 .act .n small{display:block;font-size:13px;font-weight:400;color:var(--sub)}
 .act .res{justify-self:end}
 
+/* ---------- 활동 사진 ---------- */
+.act.has{position:relative;transition:background .2s}
+.act.has:hover{background:var(--face)}
+.act.has:focus-within{outline:2px solid var(--ink);outline-offset:-2px}
+.gopen{font:inherit;color:inherit;letter-spacing:inherit;line-height:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer}
+.gopen:focus-visible{outline:0}
+.gopen::after{content:"";position:absolute;inset:0;z-index:1}
+.act .res{display:flex;align-items:center;gap:8px}
+.pic{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--sub);white-space:nowrap}
+.pic svg{width:14px;height:14px}
+.act.has:hover .pic{color:var(--ink)}
+.gbtn{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font:inherit;font-size:13px;font-weight:700;
+  color:var(--green-ink);background:var(--green-soft);border:0;border-radius:999px;padding:5px 12px;cursor:pointer;transition:filter .2s}
+.gbtn:hover{filter:brightness(.96)}
+.gbtn svg{width:14px;height:14px}
+
+.gal{border:1px solid var(--line);border-radius:var(--radius);padding:0;width:min(880px,calc(100vw - 32px));max-height:calc(100vh - 32px);
+  margin:auto;background:var(--white);color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.28);overflow:hidden}
+.gal[open]{display:flex;flex-direction:column}
+.gal::backdrop{background:rgba(29,29,31,.55);backdrop-filter:blur(4px)}
+.gal .bar{flex:none}
+.gal .lights button{width:12px;height:12px;border-radius:50%;border:0;padding:0;background:var(--red);cursor:pointer;
+  display:inline-grid;place-items:center;font-size:10px;font-weight:700;line-height:1;color:transparent}
+.gal .lights button:hover,.gal .lights button:focus-visible{color:rgba(29,29,31,.6)}
+.gx{position:absolute;right:8px;top:5px;font:inherit;font-size:12px;font-weight:700;color:var(--sub);background:none;border:0;
+  padding:4px 8px;border-radius:6px;cursor:pointer;z-index:1}
+.gx:hover{background:var(--line);color:var(--ink)}
+.gview{position:relative;flex:none;height:min(600px,calc(100vh - 250px));background:#111;display:flex;align-items:center;justify-content:center}
+.gview img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.gside{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;
+  background:rgba(255,255,255,.9);color:var(--ink);font-size:22px;line-height:1;cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.gside:hover{background:#fff}
+.gside[hidden]{display:none}
+.gprev{left:12px} .gnext{right:12px}
+.ginfo{flex:none;display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-top:1px solid var(--line)}
+.gcap{flex:1;font-size:15px;font-weight:500;line-height:1.55;min-width:0}
+.gcount{flex:none;font-size:13px;font-weight:700;color:var(--sub);padding-top:2px}
+.gcount[hidden]{display:none}
+.gfoot{flex:none;display:flex;align-items:center;gap:12px;padding:0 18px 16px;flex-wrap:wrap}
+.gfoot:empty{display:none}
+.gthumbs{display:flex;gap:8px;overflow-x:auto;flex:1;min-width:0;padding:2px}
+.gthumbs[hidden]{display:none}
+.gthumbs button{flex:none;width:56px;height:56px;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:var(--face);opacity:.6;transition:opacity .2s}
+.gthumbs button[aria-current="true"]{border-color:var(--ink);opacity:1}
+.gthumbs button:hover{opacity:1}
+.gthumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.glink{flex:none;margin-left:auto;font-size:14px;font-weight:700;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:7px 14px;transition:background .2s}
+.glink:hover{background:var(--face)}
+.glink[hidden]{display:none}
+@media (max-width:640px){
+  .gal{width:calc(100vw - 20px);max-height:calc(100vh - 20px)}
+  .gview{height:min(460px,calc(100vh - 290px))}
+  .gside{width:34px;height:34px;font-size:19px}
+  .gprev{left:8px} .gnext{right:8px}
+  .ginfo{padding:12px 14px}
+  .gcap{font-size:14px}
+  .gfoot{padding:0 14px 14px}
+  .gthumbs button{width:46px;height:46px}
+  .gthumbs{flex:1 1 100%}
+  .glink{margin-left:0}
+  .pic .t{display:none}
+}
+
 /* ---------- 7) 프로젝트 ---------- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .proj .body{padding:20px 22px 22px}
@@ -434,6 +498,7 @@ footer{border-top:1px solid var(--line);padding:48px 0 40px;margin-top:8px}
           <div class="txt">
             <div class="meta"><span class="chip g">직책</span><span class="year">2025</span></div>
             <h3>건축학부 학생회장</h3>
+            <button type="button" class="gbtn" data-g="council"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg>활동 사진 5장 보기</button>
           </div>
         </li>
         <li class="tl role rise">
@@ -460,11 +525,11 @@ footer{border-top:1px solid var(--line);padding:48px 0 40px;margin-top:8px}
         <button class="fbtn" data-f="campus" aria-pressed="false">교내</button>
       </div>
       <ul class="acts rise" aria-live="polite">
-        <li class="act" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n">무영CM 경진대회</span><span class="res"><span class="chip r">혁신상</span></span></li>
-        <li class="act" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n">한국건설관리학회 공정관리 경진대회<small>PERT·CPM 일정 계산 담당</small></span><span class="res"><span class="chip line">참가</span></span></li>
-        <li class="act" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n">제15회 도로경관디자인 대전<small>한국도로공사 · AI 활용 부문</small></span><span class="res"><span class="chip line">출품</span></span></li>
-        <li class="act" data-c="ext"><span class="y">2026</span><span class="cat"><span class="chip o">대외</span></span><span class="n">제일건설 풍경채 현장 인턴십</span><span class="res"></span></li>
-        <li class="act" data-c="ext"><span class="y">2026</span><span class="cat"><span class="chip o">대외</span></span><span class="n">차세대 건설리더 아카데미 23기</span><span class="res"><span class="chip line">수료</span></span></li>
+        <li class="act has" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n"><button type="button" class="gopen" data-g="cm">무영CM 경진대회</button></span><span class="res"><span class="pic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><span class="t">사진 </span>5</span><span class="chip r">혁신상</span></span></li>
+        <li class="act has" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n"><button type="button" class="gopen" data-g="schedule">한국건설관리학회 공정관리 경진대회</button><small>PERT·CPM 일정 계산 담당</small></span><span class="res"><span class="pic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><span class="t">사진 </span>5</span><span class="chip line">참가</span></span></li>
+        <li class="act has" data-c="contest"><span class="y">2026</span><span class="cat"><span class="chip r">공모전·대회</span></span><span class="n"><button type="button" class="gopen" data-g="road">제15회 도로경관디자인 대전</button><small>한국도로공사 · AI 활용 부문</small></span><span class="res"><span class="pic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><span class="t">사진 </span>4</span><span class="chip line">출품</span></span></li>
+        <li class="act has" data-c="ext"><span class="y">2026</span><span class="cat"><span class="chip o">대외</span></span><span class="n"><button type="button" class="gopen" data-g="intern">제일건설 풍경채 현장 인턴십</button></span><span class="res"><span class="pic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><span class="t">사진 </span>3</span></span></li>
+        <li class="act has" data-c="ext"><span class="y">2026</span><span class="cat"><span class="chip o">대외</span></span><span class="n"><button type="button" class="gopen" data-g="academy">차세대 건설리더 아카데미 23기</button></span><span class="res"><span class="pic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg><span class="t">사진 </span>1</span><span class="chip line">수료</span></span></li>
         <li class="act" data-c="campus"><span class="y">2026</span><span class="cat"><span class="chip g">교내</span></span><span class="n">시설과 멘토링 안전점검</span><span class="res"></span></li>
         <li class="act" data-c="campus"><span class="y">2025</span><span class="cat"><span class="chip g">교내</span></span><span class="n">시설과 멘토링 안전점검</span><span class="res"></span></li>
         <li class="act" data-c="ext"><span class="y">2025</span><span class="cat"><span class="chip o">대외</span></span><span class="n">기업탐방<small>유탑</small></span><span class="res"></span></li>
@@ -562,6 +627,17 @@ footer{border-top:1px solid var(--line);padding:48px 0 40px;margin-top:8px}
   </div>
 </footer>
 
+<dialog class="gal" id="gal" aria-labelledby="galTitle">
+  <div class="bar"><span class="lights sm"><button type="button" class="gclose" aria-label="닫기">×</button><i aria-hidden="true"></i><i aria-hidden="true"></i></span><span class="title" id="galTitle"></span><button type="button" class="gx gclose">닫기</button></div>
+  <div class="gview">
+    <img id="galImg" alt="">
+    <button type="button" class="gside gprev" aria-label="이전 사진">‹</button>
+    <button type="button" class="gside gnext" aria-label="다음 사진">›</button>
+  </div>
+  <div class="ginfo"><p class="gcap" id="galCap"></p><span class="gcount" id="galCount"></span></div>
+  <div class="gfoot"><div class="gthumbs" id="galThumbs"></div><a class="glink" id="galLink" hidden>프로젝트 자세히 보기 →</a></div>
+</dialog>
+
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -604,6 +680,89 @@ footer{border-top:1px solid var(--line);padding:48px 0 40px;margin-top:8px}
   }
   btns.forEach(function(b){ b.addEventListener('click', function(){ filter(b.dataset.f); }); });
   filter('all');
+
+  /* 활동 사진 보기 */
+  var G = {
+    cm: {t:'무영CM 경진대회 · 혁신상', link:'projects/cm-proposal/', p:[
+      ['images/gallery/cm/01.jpg','혁신상 수상 (팀 잼민아이)'],
+      ['images/gallery/cm/02.jpg','팀 발표'],
+      ['images/gallery/cm/03.jpg','제안서 발표'],
+      ['images/gallery/cm/04.jpg','경진대회 현장'],
+      ['images/gallery/cm/05.jpg','경진대회 현장']]},
+    schedule: {t:'한국건설관리학회 공정관리 경진대회', p:[
+      ['images/gallery/schedule/01.jpg','참가 확인증 · 2026년 11월 6일, 여수'],
+      ['images/gallery/schedule/02.jpg','참가 명찰 · 공정관리 2팀'],
+      ['images/gallery/schedule/03.jpg','경진대회 진행 모습'],
+      ['images/gallery/schedule/04.jpg','경진대회 진행 모습'],
+      ['images/gallery/schedule/05.jpg','경진대회 진행 모습']]},
+    road: {t:'제15회 도로경관디자인 대전 · 두 번 멈추는 휴게소', link:'projects/rest-area/', p:[
+      ['projects/rest-area/img/render.jpg','휴게소 건물 앞 적용 예시 (생성형 AI 이미지)'],
+      ['projects/rest-area/img/panel.jpg','출품 판넬'],
+      ['projects/rest-area/img/module.jpg','방호 모듈 3D 모델'],
+      ['projects/rest-area/img/site-plan.jpg','배치 평면도']]},
+    intern: {t:'제일건설 풍경채 현장 인턴십', p:[
+      ['images/gallery/intern/01.jpg','현장 안전교육장'],
+      ['images/gallery/intern/02.jpg','현장 실습'],
+      ['images/gallery/intern/03.jpg','현장 실습']]},
+    academy: {t:'차세대 건설리더 아카데미 23기 · 수료', link:'projects/osc-dmp/', p:[
+      ['images/gallery/academy/01.jpg','교육수료증 · 2026년 6월 22일 ~ 7월 24일 (72시간)']]},
+    council: {t:'2025 건축학부 학생회장', p:[
+      ['images/gallery/council/01.jpg','2025 건축학부 학생회 로고 ‘축(築)’'],
+      ['images/gallery/council/02.jpg','학생회 로고 디자인'],
+      ['images/gallery/council/03.jpg','2025 공학 강연회 ‘건축을 말하다’ 포스터'],
+      ['images/gallery/council/04.jpg','학생회 행사 진행 모습'],
+      ['images/gallery/council/05.jpg','학생회 행사 진행 모습']]}
+  };
+  var dlg = document.getElementById('gal');
+  if (dlg && dlg.showModal){
+    var gImg = document.getElementById('galImg'), gCap = document.getElementById('galCap'),
+        gCnt = document.getElementById('galCount'), gTh = document.getElementById('galThumbs'),
+        gTit = document.getElementById('galTitle'), gLink = document.getElementById('galLink'),
+        gPrev = dlg.querySelector('.gprev'), gNext = dlg.querySelector('.gnext'), cur = null, idx = 0, opener = null;
+    var show = function(i){
+      idx = (i + cur.p.length) % cur.p.length;
+      var it = cur.p[idx];
+      gImg.src = it[0]; gImg.alt = it[1]; gCap.textContent = it[1];
+      gCnt.textContent = (idx + 1) + ' / ' + cur.p.length;
+      Array.prototype.forEach.call(gTh.children, function(b, k){
+        if (k === idx){ b.setAttribute('aria-current', 'true'); } else { b.removeAttribute('aria-current'); }
+      });
+    };
+    var openG = function(key, btn){
+      cur = G[key]; if (!cur) return; opener = btn;
+      gTit.textContent = cur.t;
+      gTh.innerHTML = '';
+      cur.p.forEach(function(it, k){
+        var b = document.createElement('button'); b.type = 'button';
+        b.setAttribute('aria-label', (k + 1) + '번째 사진: ' + it[1]);
+        var im = document.createElement('img'); im.src = it[0]; im.alt = ''; im.loading = 'lazy';
+        b.appendChild(im); b.addEventListener('click', function(){ show(k); }); gTh.appendChild(b);
+      });
+      var many = cur.p.length > 1;
+      gPrev.hidden = gNext.hidden = gTh.hidden = gCnt.hidden = !many;
+      if (cur.link){ gLink.href = cur.link; gLink.hidden = false; } else { gLink.hidden = true; }
+      show(0);
+      dlg.showModal();
+      document.documentElement.style.overflow = 'hidden';
+    };
+    document.querySelectorAll('[data-g]').forEach(function(b){
+      b.addEventListener('click', function(){ openG(b.dataset.g, b); });
+    });
+    gPrev.addEventListener('click', function(){ show(idx - 1); });
+    gNext.addEventListener('click', function(){ show(idx + 1); });
+    dlg.querySelectorAll('.gclose').forEach(function(b){ b.addEventListener('click', function(){ dlg.close(); }); });
+    dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', function(e){
+      if (!cur || cur.p.length < 2) return;
+      if (e.key === 'ArrowLeft'){ show(idx - 1); e.preventDefault(); }
+      if (e.key === 'ArrowRight'){ show(idx + 1); e.preventDefault(); }
+    });
+    dlg.addEventListener('close', function(){
+      document.documentElement.style.overflow = '';
+      gImg.removeAttribute('src');
+      if (opener) opener.focus();
+    });
+  }
 
   /* 스크롤 등장: 보이는 상태 그대로, 아래쪽 요소만 살짝 내려 두었다가 올림 */
   if (reduce || !('IntersectionObserver' in window)) return;
