@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LNG 냉열 데이터센터 CM 제안서 — 곽지예 프로젝트</title>
+<meta name="description" content="LNG 냉열을 데이터센터 냉각에 활용하는 300MW급 사업의 건설사업관리 제안서. 무영CM 경진대회 혁신상.">
+<meta property="og:title" content="LNG 냉열 데이터센터 CM 제안서 — 곽지예 프로젝트">
+<meta property="og:description" content="LNG 냉열을 데이터센터 냉각에 활용하는 300MW급 사업의 건설사업관리 제안서. 무영CM 경진대회 혁신상.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ff5f57;--orange:#ff9f0a;--green:#28c840;--red-ink:#c4362e;--orange-ink:#a85f00;--green-ink:#1b7f2c;
+--red-soft:#fff0ef;--orange-soft:#fff5e6;--green-soft:#ecfaee;--ink:#1d1d1f;--sub:#6e6e73;--line:#e8e8ed;--face:#f5f5f7;--white:#ffffff;
+--shadow:0 1px 2px rgba(29,29,31,.04),0 8px 24px rgba(29,29,31,.06);--shadow-up:0 2px 4px rgba(29,29,31,.05),0 14px 32px rgba(29,29,31,.09);
+--radius:14px;--head:60px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:var(--white);font-size:16px;line-height:1.75;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.glow{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 0% 0%,rgba(255,95,87,.07),transparent 70%),
+radial-gradient(40vmax 40vmax at 100% 0%,rgba(255,159,10,.065),transparent 70%),
+radial-gradient(44vmax 44vmax at 100% 100%,rgba(40,200,64,.065),transparent 70%),
+radial-gradient(34vmax 34vmax at 0% 100%,rgba(255,159,10,.06),transparent 70%)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 24px}
+.lights{display:inline-flex;gap:7px;align-items:center}
+.lights i{width:12px;height:12px;border-radius:50%;display:inline-grid;place-items:center;font-style:normal;font-size:10px;line-height:1;font-weight:700;color:transparent;transition:color .15s}
+.lights i:nth-child(1){background:var(--red)}.lights i:nth-child(2){background:var(--orange)}.lights i:nth-child(3){background:var(--green)}
+.lights.sm{gap:6px}.lights.sm i{width:10px;height:10px}
+.head{position:fixed;top:0;left:0;right:0;z-index:20;height:var(--head);background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid rgba(232,232,237,.8)}
+.head .inner{max-width:1080px;height:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:17px;letter-spacing:-.02em}
+.nav{display:flex;gap:4px}
+.nav a{font-size:14px;color:var(--sub);padding:6px 11px;border-radius:999px;transition:color .2s,background .2s}
+.nav a:hover{color:var(--ink);background:var(--face)}.nav a.on{color:var(--ink);font-weight:700}
+.back{font-size:14px;font-weight:700;color:var(--ink);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--white);white-space:nowrap}
+.back:hover{border-color:var(--sub)}
+main{padding-top:var(--head)}
+section{padding:80px 0;border-top:1px solid var(--line);scroll-margin-top:var(--head)}
+section.first{border-top:0;padding-top:40px}
+.crumb{font-size:13px;color:var(--sub);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.crumb a:hover{color:var(--ink)}.crumb span[aria-hidden]{color:var(--line)}
+.label{display:inline-flex;align-items:flex-start;gap:8px;font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.02em;margin-bottom:14px}
+.label::before{content:"";flex:0 0 8px;height:8px;margin-top:.55em;border-radius:50%;background:var(--dot,var(--ink))}
+.r{--dot:var(--red)}.o{--dot:var(--orange)}.g{--dot:var(--green)}
+h1{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1.3}
+h2{font-size:28px;font-weight:800;letter-spacing:-.035em;line-height:1.35;margin-bottom:28px}
+h3{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.45}
+.lead{font-size:18px;color:var(--sub);margin-top:16px;font-weight:500;letter-spacing:-.02em}
+.lead b{color:var(--ink);font-weight:700}
+p.body{font-size:16px}p.body + p.body{margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;line-height:1.6;white-space:nowrap;background:var(--face);color:var(--sub)}
+.chip.r{background:var(--red-soft);color:var(--red-ink)}.chip.o{background:var(--orange-soft);color:var(--orange-ink)}.chip.g{background:var(--green-soft);color:var(--green-ink)}
+.chip.line{background:var(--white);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.win{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.win:hover .lights i{color:rgba(29,29,31,.55)}
+.bar{position:relative;height:36px;display:flex;align-items:center;padding:0 14px;background:var(--face);border-bottom:1px solid var(--line)}
+.bar .title{position:absolute;left:0;right:0;text-align:center;font-size:12px;font-weight:500;color:var(--sub);pointer-events:none;padding:0 72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{display:grid;grid-template-columns:104px 1fr;row-gap:10px;column-gap:14px;padding:22px 24px;font-size:15px}
+.meta dt{color:var(--sub);font-size:14px;padding-top:1px}.meta dd{font-weight:500}
+.hero-card{margin-top:32px}
+figure{margin:0}
+figure.fig{margin-top:24px}
+figure.fig .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--white)}
+figure.fig a{display:block}
+figcaption{font-size:13px;color:var(--sub);margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);background:var(--white);margin-top:28px;overflow:hidden}
+.stat{padding:18px 16px;border-left:1px solid var(--line)}.stat:first-child{border-left:0}
+.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.stat span{display:block;font-size:13px;color:var(--sub);margin-top:4px;line-height:1.5}
+.stats-note{font-size:12px;color:var(--sub);margin-top:8px}
+.ncards{display:grid;gap:12px;counter-reset:n}
+.ncards.c3{grid-template-columns:repeat(3,1fr)}.ncards.c2{grid-template-columns:repeat(2,1fr)}
+.ncard{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--white);transition:transform .25s ease,box-shadow .25s ease}
+.ncard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.ncard .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-size:13px;font-weight:800;background:var(--soft,var(--face));color:var(--ink2,var(--sub));margin-bottom:10px}
+.ncard p{font-size:14px;color:var(--sub);margin-top:6px;line-height:1.65}
+.ncard.r{--soft:var(--red-soft);--ink2:var(--red-ink)}.ncard.o{--soft:var(--orange-soft);--ink2:var(--orange-ink)}.ncard.g{--soft:var(--green-soft);--ink2:var(--green-ink)}
+.ncard.x{opacity:1}.ncard .tag{margin-top:10px}
+.steps{list-style:none;display:grid;gap:0;position:relative}
+.step{display:flex;gap:18px;position:relative;padding-bottom:24px}
+.step:not(:last-child)::before{content:"";position:absolute;left:17.5px;top:36px;bottom:0;width:1px;background:var(--line)}
+.step .num{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--soft,var(--face));color:var(--ink2,var(--sub));border:1px solid var(--edge,var(--line));position:relative;z-index:1}
+.steps.r .num{--soft:var(--red-soft);--ink2:var(--red-ink);--edge:var(--red)}
+.steps.o .num{--soft:var(--orange-soft);--ink2:var(--orange-ink);--edge:var(--orange)}
+.steps.g .num{--soft:var(--green-soft);--ink2:var(--green-ink);--edge:var(--green)}
+.step .txt{padding-top:5px;min-width:0}
+.step p{font-size:15px;color:var(--sub);margin-top:4px}
+.step ul{margin:6px 0 0 18px;font-size:14px;color:var(--sub)}
+.tbl-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto;background:var(--white);margin-top:20px}
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+thead th{border-top:0;background:var(--face);font-size:13px;color:var(--sub);font-weight:700;white-space:nowrap}
+td.k{font-weight:700;white-space:nowrap}
+td.num,th.num{text-align:right;white-space:nowrap}
+tr.hi td{background:var(--soft-row,var(--green-soft))}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.compare > div{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--white)}
+.compare h3{font-size:15px;margin-bottom:10px}
+.compare ul{list-style:none;display:grid;gap:8px;font-size:14px}
+.compare li{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px}
+.compare li:first-child{border-top:0;padding-top:0}
+.compare li span{color:var(--sub)}.compare li b{font-weight:700;text-align:right}
+.compare.c3{grid-template-columns:repeat(3,1fr)}
+.compare .best{border-color:var(--edge,var(--green));box-shadow:inset 0 3px 0 var(--edge,var(--green))}
+.bars{display:grid;gap:12px;margin-top:20px}
+.barrow{display:grid;grid-template-columns:170px 1fr 140px;gap:12px;align-items:center;font-size:14px}
+.barrow .track{height:12px;border-radius:999px;background:var(--face);overflow:hidden}
+.barrow .fill{height:100%;border-radius:999px;background:var(--c,var(--ink))}
+.barrow .v{text-align:right;font-weight:700;white-space:nowrap}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.flow > div{border:1px solid var(--line);border-radius:12px;padding:16px 14px;background:var(--white);position:relative}
+.flow .st{font-size:12px;font-weight:700;color:var(--ink2,var(--sub))}
+.flow h3{font-size:16px;margin-top:2px}.flow p{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.6}
+.flow.o{--ink2:var(--orange-ink)}.flow.r{--ink2:var(--red-ink)}.flow.g{--ink2:var(--green-ink)}
+.note{margin-top:20px;font-size:14px;color:var(--sub);background:var(--face);border-radius:12px;padding:14px 16px}
+.note b{color:var(--ink)}
+.sub-h{font-size:17px;font-weight:800;margin:40px 0 4px;letter-spacing:-.02em}
+.sub-h + p.body{color:var(--sub);font-size:15px}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.grades div{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--white)}
+.grades b{display:block;font-size:24px;font-weight:800}
+.grades span{font-size:13px;color:var(--sub)}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pn a{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;background:var(--white);transition:transform .25s ease,box-shadow .25s ease,border-color .2s}
+.pn a:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--sub)}
+.pn small{display:block;font-size:12px;color:var(--sub);font-weight:700}
+.pn b{display:block;font-size:15px;font-weight:700;margin-top:4px;line-height:1.5}
+.pn .nx{text-align:right}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;padding:11px 22px;border-radius:999px;border:1px solid var(--ink);transition:transform .2s ease}
+.btn.solid{background:var(--ink);color:var(--white)}.btn.ghost{background:var(--white);border-color:var(--line)}
+.btn:hover{transform:translateY(-2px)}
+footer{border-top:1px solid var(--line);padding:40px 0 36px;margin-top:8px}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.foot b{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800}
+.foot p{font-size:14px;color:var(--sub);margin-top:8px}
+.foot .lk{display:flex;gap:18px;font-size:14px;color:var(--sub)}.foot .lk a:hover{color:var(--ink)}
+.copy{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+.js .rise{transition:transform .6s cubic-bezier(.2,.7,.2,1)}.js .rise.down{transform:translateY(16px)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.shots figure{margin:0}.shots a{display:block}.shots img{width:100%;height:auto;display:block}
+.shots figcaption{font-size:12px;color:var(--sub);margin-top:6px;text-align:center;line-height:1.5}
+.btns.left{justify-content:flex-start}
+a.inl{font-weight:700;border-bottom:1px solid var(--line)}a.inl:hover{border-color:var(--ink)}
+@media (max-width:820px){.nav{display:none}}
+@media (max-width:640px){
+.shots{grid-template-columns:1fr 1fr}
+ .wrap{padding:0 20px}section{padding:60px 0}section.first{padding-top:32px}
+ h1{font-size:30px}h2{font-size:23px;margin-bottom:22px}.lead{font-size:16px}
+ .meta{grid-template-columns:84px 1fr;font-size:14px;padding:18px}
+ .stats{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+ .ncards.c3,.ncards.c2,.compare,.compare.c3,.pn{grid-template-columns:1fr}
+ .flow,.grades{grid-template-columns:1fr 1fr}
+ .barrow{grid-template-columns:1fr auto;row-gap:6px}.barrow .lb{grid-column:1 / -1}
+ .pn .nx{text-align:left}
+ table{font-size:13px}th,td{padding:10px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.js .rise.down{transform:none}.ncard:hover,.pn a:hover,.btn:hover{transform:none}}
+
+:root{--accent:#e5262e;--ink:#f2f2f2;--sub:#a1a1a6;--line:#2a2a2d;--face:#1a1a1d;--white:#0e0e10;
+--red:#ff5a52;--orange:#ffa630;--green:#35d058;--red-ink:#ff7a73;--orange-ink:#ffb85c;--green-ink:#5ee07c;
+--red-soft:#3a1716;--orange-soft:#3a2912;--green-soft:#12301b;--shadow:0 8px 24px rgba(0,0,0,.45)}
+html,body{background:#0b0b0c;color-scheme:dark}
+.glow,.lights{display:none}
+.head{background:rgba(11,11,12,.9);border-bottom-color:#1f1f22}
+.brand{color:var(--accent);font-size:21px;font-weight:800;letter-spacing:-.03em}
+.nav a.on{color:#fff}
+.back{background:transparent;border-color:rgba(255,255,255,.6);border-radius:4px;color:#fff}
+.back:hover{border-color:#fff}
+.win,.stats,.ncard,.tbl-wrap,.compare>div,.flow>div,.grades div,.pn a{background:#141416}
+.bar{background:#1b1b1e}
+.chip.line{background:transparent;border-color:#3a3a3e;color:#c8c8cc}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:#fff;border-radius:4px}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.6);color:#fff;border-radius:4px}
+figure.fig .frame,.shots .frame{border-color:#2a2a2d}
+.label::before{background:var(--dot,var(--accent))}
+h1{background:linear-gradient(90deg,#fff 0 50%,#5b5b60 50% 100%);background-size:200% 100%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wipe 1.1s cubic-bezier(.4,0,.2,1) both}
+@keyframes wipe{from{background-position:100% 0}to{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){h1{animation:none;background:none;color:#fff;-webkit-background-clip:border-box;background-clip:border-box}}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<header class="head"><div class="inner">
+  <a class="brand" href="../../" aria-label="곽지예 홈으로">KWAK JIYE</a>
+  <nav class="nav" aria-label="이 페이지 목차"><a href="#overview">개요</a><a href="#problem">배경</a><a href="#cooling">핵심 기술</a><a href="#cm">CM 관리</a><a href="#risk">리스크</a></nav>
+  <a class="back" href="../">← 프로젝트</a><a class="back" href="../../../projects/cm-proposal/" style="margin-left:-16px">Light ver.</a>
+</div></header>
+<main>
+  <section id="overview" class="first">
+    <div class="wrap">
+      <nav class="crumb" aria-label="현재 위치"><a href="../../">곽지예</a><span aria-hidden="true">›</span><a href="../">프로젝트</a><span aria-hidden="true">›</span><span>CM 제안서</span></nav>
+      <div class="label r">CM 제안서 · 무영CM 경진대회 혁신상</div>
+      <h1>광양 동호안 LNG 냉열 기반<br>하이퍼스케일 데이터센터 건립 CM 제안서</h1>
+      <p class="lead">LNG 터미널에서 버려지는 <b>영하 162℃의 냉열</b>을 데이터센터 냉각에 쓰고, 연약지반·공기·사업 구조까지 <b>건설사업관리(CM) 관점</b>에서 하나의 사업으로 묶어 제안했습니다.</p>
+      <article class="win hero-card rise">
+        <div class="bar"><span class="lights" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">cm-proposal — 잼민아이</span></div>
+        <dl class="meta"><dt>유형</dt><dd>CM 제안서 · 팀 프로젝트 (팀 잼민아이)</dd><dt>제출</dt><dd>2026년 7월 17일</dd><dt>결과</dt><dd><span class="chip r">무영CM 경진대회 혁신상</span></dd><dt>대상 사업</dt><dd>광양 동호안 LNG 냉열 연계 300MW급 데이터센터 캠퍼스 신축사업</dd><dt>CM 방식</dt><dd>CM at-Risk · 프리콘 단계부터 발주자 대리인으로 참여하는 것을 전제</dd><dt>산출물</dt><dd>제안서 11쪽 · 발표 자료 30장 · 마스터 공정표</dd></dl>
+      </article>
+      <div class="stats rise"><div class="stat"><b>300MW</b><span>100MW × 3개 단지, Tier 3</span></div><div class="stat"><b>PUE 1.10</b><span>평균 데이터센터 1.56 대비</span></div><div class="stat"><b>30개월</b><span>기존 공법 40개월 대비 단축</span></div><div class="stat"><b>약 2조 5,200억</b><span>예상 총사업비 (MW당 약 84억)</span></div></div><p class="stats-note">수치는 모두 제안서에 제시한 목표·추정치입니다.</p>
+    </div>
+  </section>
+  <section id="problem">
+    <div class="wrap">
+      <div class="label r">배경</div>
+      <h2>부지와 사업이 가진 네 가지 숙제</h2>
+
+      <p class="body rise">국내 데이터센터 165개 가운데 100MW 이상은 6개뿐이라는 점에서 출발했습니다. 전력 자급률이 높은 전남, 그중에서도 LNG 터미널과 1km 안에 붙어 있는 광양 동호안을 부지로 골랐고, 이 부지가 가진 문제를 하나씩 해결 방안과 짝지었습니다.</p>
+      <div class="tbl-wrap rise"><table>
+        <thead><tr><th>숙제</th><th>문제</th><th>해결 방안</th><th>제안서의 기대 효과</th></tr></thead>
+        <tbody>
+          <tr><td class="k">입지</td><td>30m 이상 초연약지반</td><td>제강슬래그 다짐말뚝 + 고강도 강관파일(KS-STP550)</td><td>부동침하 0%, 파일 2,500본 → 1,500본</td></tr>
+          <tr><td class="k">CAPEX</td><td>막대한 초기 투자비</td><td>제강슬래그 + PC 모듈화 + 액침냉각 PMDC</td><td>MW당 약 84억 원 (글로벌 Tier III 평균 대비 약 45% 절감)</td></tr>
+          <tr><td class="k">OPEX</td><td>냉방 전력 소모 과다 (평균 전력의 약 35%)</td><td>-162℃ LNG 냉열 + 심층 해수 결합</td><td>PUE 1.10, 연간 약 1,763억 원 냉각 전력비 절감</td></tr>
+          <tr><td class="k">공기</td><td>과도한 공사 기간</td><td>토목·CUP·PMDC 3-Track 병렬 시공</td><td>40개월 → 30개월</td></tr>
+        </tbody></table></div>
+      <h3 class="sub-h">부지 비교</h3>
+      <p class="body">LNG 냉열을 직접 받을 수 있는 광양 일대 후보지 세 곳을 비교했습니다.</p>
+      <div class="compare c3 rise">
+        <div class="best" style="--edge:var(--red)"><h3>A. 광양 동호안 매립지 ✓</h3><ul><li><span>예상 건설비</span><b>약 2.5조</b></li><li><span>장점</span><b>LNG 배관 1km 이내</b></li><li><span>결과</span><b>최저 CAPEX</b></li></ul></div>
+        <div><h3>B. 여수 묘도 준설토 매립장</h3><ul><li><span>예상 건설비</span><b>약 4.1조</b></li><li><span>장점</span><b>해상 물류</b></li><li><span>한계</span><b>OPEX 과다</b></li></ul></div>
+        <div><h3>C. 율촌제1산업단지</h3><ul><li><span>예상 건설비</span><b>약 4.2조</b></li><li><span>장점</span><b>안정적 지반</b></li><li><span>한계</span><b>해저 배관 투자비</b></li></ul></div>
+      </div>
+
+    </div>
+  </section>
+  <section id="cooling">
+    <div class="wrap">
+      <div class="label r">핵심 기술</div>
+      <h2>버려지는 냉열로 서버를 식히는 4단계</h2>
+
+      <p class="body rise">LNG가 다시 기체가 될 때 내놓는 냉열(1kg당 830~860kJ)과 연중 5~20℃인 해수를 1차 열원으로 삼고, 기계식 칠러는 백업으로만 두는 구조입니다.</p>
+      <div class="flow r rise">
+        <div><span class="st">1차 · 열원</span><h3>LNG 냉열 + 해수</h3><p>-162℃ LNG 냉열(IFV 열교환기)과 5~20℃ 해수(티타늄 판형 열교환기)로 브라인을 식힘</p></div>
+        <div><span class="st">2차 · 축열</span><h3>지중 수축열조 TES</h3><p>남는 냉열을 저장했다가 해수 온도가 오르는 7~8월에 방출, 공급 중단 시 20~30분 비상 백업</p></div>
+        <div><span class="st">3차 · 분배</span><h3>중앙 플랜트 CUP</h3><p>냉각 생산과 소비를 분리해 15℃ 브라인을 지중 배관으로 각 모듈에 분배</p></div>
+        <div><span class="st">4차 · 제거</span><h3>액침냉각 PMDC</h3><p>서버를 유전체 오일에 담가 냉각, 데워진 브라인(35~40℃)은 CUP로 돌아가는 폐쇄 루프</p></div>
+      </div>
+      <div class="compare rise">
+        <div><h3>평균 데이터센터 (공랭식)</h3><ul><li><span>목표 PUE</span><b>1.56</b></li><li><span>냉각 전용 전력</span><b>163.8MW</b></li><li><span>연간 냉각 전력비</span><b>약 2,008.8억 원</b></li></ul></div>
+        <div class="best" style="--edge:var(--red)"><h3>제안 데이터센터 (하이브리드)</h3><ul><li><span>목표 PUE</span><b>1.10</b></li><li><span>냉각 전용 전력</span><b>20MW</b></li><li><span>연간 냉각 전력비</span><b>약 245.2억 원</b></li></ul></div>
+      </div>
+      <p class="note">기준: IT 부하 300MW, 전기요금 140원/kWh, 연 8,760시간 가동 (제안서 산정 조건)</p>
+<figure class="fig rise"><a class="frame" href="../../../projects/cm-proposal/img/cooling.jpg" target="_blank" rel="noopener"><img src="../../../projects/cm-proposal/img/cooling.jpg" alt="4단계 냉각 제어 체계 다이어그램: 열원(LNG·해수), 축열(TES), 중앙 제어(CUP), 액침냉각(PMDC)" loading="lazy"></a><figcaption>발표 자료 중 ‘4단계 냉각 제어 체계’ — 열원 → 축열 → 중앙 제어 → 액침냉각</figcaption></figure>
+    </div>
+  </section>
+  <section id="cm">
+    <div class="wrap">
+      <div class="label r">CM 관리</div>
+      <h2>공정·원가·사업 구조를 함께 관리</h2>
+
+      <ol class="steps r rise">
+        <li class="step"><span class="num">1</span><div class="txt"><h3>기획 — SPC 설립과 인허가</h3><p>건폐율·용적률·용도지역·내진설계와 전력계통·환경영향평가 등 인허가 항목을 법적 기준과 대조해 충족 여부를 정리</p></div></li>
+        <li class="step"><span class="num">2</span><div class="txt"><h3>설계 — DfMA와 BIM 최적화</h3><p>PC 부재를 광주·영암 제조 공장에서 동시에 조달하는 전략으로 자재 수급 병목을 막는 방안</p></div></li>
+        <li class="step"><span class="num">3</span><div class="txt"><h3>시공 — 3-Track 병렬 시공</h3><p>현장 토목·기초, CUP 플랜트, PMDC 공장 제작을 동시에 진행해 전체 공기를 30개월로 압축</p></div></li>
+        <li class="step"><span class="num">4</span><div class="txt"><h3>운영 — O/M과 냉열 관리</h3><p>준공 후 운영·유지관리와 냉열 공급 관리까지 사업 단계에 포함</p></div></li>
+      </ol>
+      <h3 class="sub-h">Fast-Track 30개월 마일스톤</h3>
+      <div class="tbl-wrap rise"><table>
+        <thead><tr><th>마일스톤</th><th class="num">착공 후</th><th>핵심 내용</th></tr></thead>
+        <tbody>
+          <tr><td class="k">인허가 완료</td><td class="num">4개월</td><td>100MW 우선 수전 협의 (한전 154kV)</td></tr>
+          <tr><td class="k">1단계 기초 완료</td><td class="num">13개월</td><td>제강슬래그 치환 + 강관파일 1,500본 + 매트 기초</td></tr>
+          <tr><td class="k">CUP 완공</td><td class="num">18개월</td><td>LNG 1단 열교환기 + 해수 취수 시스템 가동</td></tr>
+          <tr><td class="k">1단계 100MW 첫 가동</td><td class="num">약 22개월</td><td>PMDC 200대 현장 결합 + 시운전</td></tr>
+          <tr><td class="k">전체 300MW 가동</td><td class="num">약 30개월</td><td>2·3단계 순차 스케일아웃</td></tr>
+        </tbody></table></div>
+      <h3 class="sub-h">총공사비 구성 (CAPEX)</h3>
+      <div class="bars rise">
+        <div class="barrow"><span class="lb">냉각설비 (CUP + PMDC)</span><div class="track"><div class="fill" style="width:51.1%;--c:var(--red)"></div></div><span class="v">11,350억 · 51.1%</span></div>
+        <div class="barrow"><span class="lb">건물공사 (PC + MEP)</span><div class="track"><div class="fill" style="width:23.4%;--c:var(--orange)"></div></div><span class="v">5,200억 · 23.4%</span></div>
+        <div class="barrow"><span class="lb">간접비 (금융·CM·예비비)</span><div class="track"><div class="fill" style="width:16.7%;--c:var(--sub)"></div></div><span class="v">3,700억 · 16.7%</span></div>
+        <div class="barrow"><span class="lb">기초공사</span><div class="track"><div class="fill" style="width:8.8%;--c:var(--green)"></div></div><span class="v">1,950억 · 8.8%</span></div>
+      </div>
+      <h3 class="sub-h">Two-SPC 사업 구조</h3>
+      <p class="body">부동산 자산을 소유하는 법인(PropCo)과 IT 운영을 맡는 법인(OpCo)을 나누어 사업 간 위험이 번지지 않게 하고, CM이 그 사이 인터페이스를 조율하는 구조로 설계했습니다.</p>
+      <div class="ncards c3 rise" style="margin-top:20px">
+        <div class="ncard r"><span class="n">P</span><h3>발주처 (PropCo)</h3><p>부지 확보·인프라 소유. CM은 CAPEX 확정과 책임준공을 지원</p></div>
+        <div class="ncard r"><span class="n">O</span><h3>운영사 (OpCo)</h3><p>AI 하드웨어 투자·클라우드 운영. CM은 PUE 1.10 운영 환경을 보장</p></div>
+        <div class="ncard r"><span class="n">F</span><h3>금융권 (대주단)</h3><p>약 1조 4,400억 원 규모 시니어 PF. CM은 30개월 공기 근거로 불확실성 축소</p></div>
+      </div>
+
+    </div>
+  </section>
+  <section id="risk">
+    <div class="wrap">
+      <div class="label r">리스크</div>
+      <h2>시공·재무·운영 리스크와 대응</h2>
+
+      <div class="tbl-wrap rise"><table>
+        <thead><tr><th>구분</th><th>예상 위험</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td class="k">시공</td><td>초연약 지반 부동침하, 해풍·악천후 공기 지연</td><td>실시간 침하 모니터링, OSC 공법 확대로 기후 영향 최소화</td></tr>
+          <tr><td class="k">재무</td><td>금리 인상에 따른 이자 증가, 초기 공실</td><td>이자율스왑(IRS)으로 고정금리, 앵커 테넌트 선임대</td></tr>
+          <tr><td class="k">운영</td><td>하절기 해수 냉각 효율 저하, 고밀도 서버 화재</td><td>TES 여유 설계로 피크 분산, 모듈 간 독립 방화 격벽</td></tr>
+        </tbody></table></div>
+<figure class="fig rise"><a class="frame" href="../../../projects/cm-proposal/img/aerial.jpg" target="_blank" rel="noopener"><img src="../../../projects/cm-proposal/img/aerial.jpg" alt="바다에 접한 매립지 위에 여러 동의 데이터센터 건물이 들어선 예상 조감도" loading="lazy"></a><figcaption>제안서의 광양 데이터센터 예상 조감도</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="wrap">
+      <div class="label">이어서 보기</div>
+      <h2>다른 프로젝트</h2>
+      <div class="pn">
+        <a href="../ai-apps/"><small>← 이전</small><b>AI 활용 프로젝트 — LRFD 놀이터 · 지예건설</b></a>
+        <a class="nx" href="../winter-concrete/"><small>다음 →</small><b>발열팩 분말을 활용한 영하 환경 콘크리트의 수화 반응 촉진 연구</b></a>
+      </div>
+      <div class="btns">
+        <a class="btn solid" href="../">프로젝트 목록</a>
+        <a class="btn ghost" href="../../">곽지예 소개</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">
+  <div class="foot">
+    <div><b>곽지예</b><p>현장을 이해하고 사람을 이끄는, 차세대 건설리더를 꿈꿉니다.</p></div>
+    <div class="lk"><a href="../../">소개</a><a href="../">프로젝트</a><a href="mailto:wldp2003@naver.com">wldp2003@naver.com</a></div>
+  </div>
+  <p class="copy">© 2026 곽지예. All rights reserved.</p>
+</div></footer>
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var links=[].slice.call(document.querySelectorAll('.nav a'));
+ var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+ function cur(){var y=window.scrollY+window.innerHeight*.35,c=secs[0];
+  secs.forEach(function(s){if(s.getBoundingClientRect().top+window.scrollY<=y)c=s;});
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)c=secs[secs.length-1];
+  links.forEach(function(a){var on=a.getAttribute('href')==='#'+c.id;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
+ var t=false;window.addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){cur();t=false;});}},{passive:true});
+ window.addEventListener('resize',cur);cur();
+ if(reduce||!('IntersectionObserver' in window))return;
+ document.documentElement.classList.add('js');
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('down');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+ document.querySelectorAll('.rise').forEach(function(el){if(el.getBoundingClientRect().top>window.innerHeight*.92){el.classList.add('down');io.observe(el);}});
+})();
+</script>
+</body>
+</html>

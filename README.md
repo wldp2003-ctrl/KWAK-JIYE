@@ -6,6 +6,7 @@
 
 - 사이트 주소: https://wldp2003-ctrl.github.io/KWAK-JIYE/
 - 저장소: https://github.com/wldp2003-ctrl/KWAK-JIYE
+- 어두운 버전(v2, 영상 플랫폼 컨셉): https://wldp2003-ctrl.github.io/KWAK-JIYE/v2/
 - 연락처(공개): wldp2003@naver.com — 마무리 카드와 푸터에 표시
 
 ## 파일 구성
@@ -24,6 +25,7 @@ site/
  │   ├─ rest-area/        두 번 멈추는 휴게소 (도로경관디자인 대전)
  │   └─ ai-apps/          AI 활용 프로젝트 (하반기 캡스톤) — play/에 LRFD 놀이터 원본 앱 (지예건설은 별도 저장소 jiye-construction)
  ├─ contact/            연락 (마무리 메시지, 이메일)
+ ├─ v2/                 어두운 버전(영상 플랫폼 컨셉). 같은 구성, 본문은 기본 버전에서 가져와 다시 만듦
  ├─ assets/site.css     메인과 위 페이지들이 함께 쓰는 디자인
  ├─ assets/site.js      메뉴, 활동 분류, 사진 보기 창, 스크롤 효과
  ├─ images/profile.jpg  증명사진 (긴 변 800px, 사진 정보(EXIF) 제거)
@@ -104,3 +106,8 @@ git push
 ```
 
 올린 뒤 1~2분 정도 지나면 사이트에 반영됩니다. 바로 안 보이면 브라우저에서 새로고침(Ctrl+F5)을 해 보세요.
+
+## v2 (어두운 버전) 고치기
+
+v2 페이지는 기본 버전의 내용을 가져와 만든 결과물입니다. 내용을 바꿀 때는 기본 버전을 먼저 고친 뒤 v2를 다시 만들어야 같은 내용이 유지됩니다.
+v2만의 디자인은 `v2/assets/v2.css`, 움직임(글자 채움, 가로 줄 넘기기, 질문창 → 메일)은 `v2/assets/v2.js`에 있습니다.

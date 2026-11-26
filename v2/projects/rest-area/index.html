@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>두 번 멈추는 휴게소 — 곽지예 프로젝트</title>
+<meta name="description" content="휴게소 보행자 충돌사고를 줄이는 벤치 겸용 방호 시설 제안. 제15회 도로경관디자인 대전 AI 활용 부문 출품작.">
+<meta property="og:title" content="두 번 멈추는 휴게소 — 곽지예 프로젝트">
+<meta property="og:description" content="휴게소 보행자 충돌사고를 줄이는 벤치 겸용 방호 시설 제안. 제15회 도로경관디자인 대전 AI 활용 부문 출품작.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ff5f57;--orange:#ff9f0a;--green:#28c840;--red-ink:#c4362e;--orange-ink:#a85f00;--green-ink:#1b7f2c;
+--red-soft:#fff0ef;--orange-soft:#fff5e6;--green-soft:#ecfaee;--ink:#1d1d1f;--sub:#6e6e73;--line:#e8e8ed;--face:#f5f5f7;--white:#ffffff;
+--shadow:0 1px 2px rgba(29,29,31,.04),0 8px 24px rgba(29,29,31,.06);--shadow-up:0 2px 4px rgba(29,29,31,.05),0 14px 32px rgba(29,29,31,.09);
+--radius:14px;--head:60px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Noto Sans KR",sans-serif;color:var(--ink);background:var(--white);font-size:16px;line-height:1.75;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+.glow{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+radial-gradient(42vmax 42vmax at 0% 0%,rgba(255,95,87,.07),transparent 70%),
+radial-gradient(40vmax 40vmax at 100% 0%,rgba(255,159,10,.065),transparent 70%),
+radial-gradient(44vmax 44vmax at 100% 100%,rgba(40,200,64,.065),transparent 70%),
+radial-gradient(34vmax 34vmax at 0% 100%,rgba(255,159,10,.06),transparent 70%)}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%;height:auto}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 24px}
+.lights{display:inline-flex;gap:7px;align-items:center}
+.lights i{width:12px;height:12px;border-radius:50%;display:inline-grid;place-items:center;font-style:normal;font-size:10px;line-height:1;font-weight:700;color:transparent;transition:color .15s}
+.lights i:nth-child(1){background:var(--red)}.lights i:nth-child(2){background:var(--orange)}.lights i:nth-child(3){background:var(--green)}
+.lights.sm{gap:6px}.lights.sm i{width:10px;height:10px}
+.head{position:fixed;top:0;left:0;right:0;z-index:20;height:var(--head);background:rgba(255,255,255,.72);-webkit-backdrop-filter:saturate(180%) blur(18px);backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid rgba(232,232,237,.8)}
+.head .inner{max-width:1080px;height:100%;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:17px;letter-spacing:-.02em}
+.nav{display:flex;gap:4px}
+.nav a{font-size:14px;color:var(--sub);padding:6px 11px;border-radius:999px;transition:color .2s,background .2s}
+.nav a:hover{color:var(--ink);background:var(--face)}.nav a.on{color:var(--ink);font-weight:700}
+.back{font-size:14px;font-weight:700;color:var(--ink);padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--white);white-space:nowrap}
+.back:hover{border-color:var(--sub)}
+main{padding-top:var(--head)}
+section{padding:80px 0;border-top:1px solid var(--line);scroll-margin-top:var(--head)}
+section.first{border-top:0;padding-top:40px}
+.crumb{font-size:13px;color:var(--sub);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.crumb a:hover{color:var(--ink)}.crumb span[aria-hidden]{color:var(--line)}
+.label{display:inline-flex;align-items:flex-start;gap:8px;font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.02em;margin-bottom:14px}
+.label::before{content:"";flex:0 0 8px;height:8px;margin-top:.55em;border-radius:50%;background:var(--dot,var(--ink))}
+.r{--dot:var(--red)}.o{--dot:var(--orange)}.g{--dot:var(--green)}
+h1{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1.3}
+h2{font-size:28px;font-weight:800;letter-spacing:-.035em;line-height:1.35;margin-bottom:28px}
+h3{font-size:18px;font-weight:700;letter-spacing:-.02em;line-height:1.45}
+.lead{font-size:18px;color:var(--sub);margin-top:16px;font-weight:500;letter-spacing:-.02em}
+.lead b{color:var(--ink);font-weight:700}
+p.body{font-size:16px}p.body + p.body{margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;line-height:1.6;white-space:nowrap;background:var(--face);color:var(--sub)}
+.chip.r{background:var(--red-soft);color:var(--red-ink)}.chip.o{background:var(--orange-soft);color:var(--orange-ink)}.chip.g{background:var(--green-soft);color:var(--green-ink)}
+.chip.line{background:var(--white);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.win{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.win:hover .lights i{color:rgba(29,29,31,.55)}
+.bar{position:relative;height:36px;display:flex;align-items:center;padding:0 14px;background:var(--face);border-bottom:1px solid var(--line)}
+.bar .title{position:absolute;left:0;right:0;text-align:center;font-size:12px;font-weight:500;color:var(--sub);pointer-events:none;padding:0 72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{display:grid;grid-template-columns:104px 1fr;row-gap:10px;column-gap:14px;padding:22px 24px;font-size:15px}
+.meta dt{color:var(--sub);font-size:14px;padding-top:1px}.meta dd{font-weight:500}
+.hero-card{margin-top:32px}
+figure{margin:0}
+figure.fig{margin-top:24px}
+figure.fig .frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--white)}
+figure.fig a{display:block}
+figcaption{font-size:13px;color:var(--sub);margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--radius);background:var(--white);margin-top:28px;overflow:hidden}
+.stat{padding:18px 16px;border-left:1px solid var(--line)}.stat:first-child{border-left:0}
+.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.stat span{display:block;font-size:13px;color:var(--sub);margin-top:4px;line-height:1.5}
+.stats-note{font-size:12px;color:var(--sub);margin-top:8px}
+.ncards{display:grid;gap:12px;counter-reset:n}
+.ncards.c3{grid-template-columns:repeat(3,1fr)}.ncards.c2{grid-template-columns:repeat(2,1fr)}
+.ncard{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--white);transition:transform .25s ease,box-shadow .25s ease}
+.ncard:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.ncard .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font-size:13px;font-weight:800;background:var(--soft,var(--face));color:var(--ink2,var(--sub));margin-bottom:10px}
+.ncard p{font-size:14px;color:var(--sub);margin-top:6px;line-height:1.65}
+.ncard.r{--soft:var(--red-soft);--ink2:var(--red-ink)}.ncard.o{--soft:var(--orange-soft);--ink2:var(--orange-ink)}.ncard.g{--soft:var(--green-soft);--ink2:var(--green-ink)}
+.ncard.x{opacity:1}.ncard .tag{margin-top:10px}
+.steps{list-style:none;display:grid;gap:0;position:relative}
+.step{display:flex;gap:18px;position:relative;padding-bottom:24px}
+.step:not(:last-child)::before{content:"";position:absolute;left:17.5px;top:36px;bottom:0;width:1px;background:var(--line)}
+.step .num{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;background:var(--soft,var(--face));color:var(--ink2,var(--sub));border:1px solid var(--edge,var(--line));position:relative;z-index:1}
+.steps.r .num{--soft:var(--red-soft);--ink2:var(--red-ink);--edge:var(--red)}
+.steps.o .num{--soft:var(--orange-soft);--ink2:var(--orange-ink);--edge:var(--orange)}
+.steps.g .num{--soft:var(--green-soft);--ink2:var(--green-ink);--edge:var(--green)}
+.step .txt{padding-top:5px;min-width:0}
+.step p{font-size:15px;color:var(--sub);margin-top:4px}
+.step ul{margin:6px 0 0 18px;font-size:14px;color:var(--sub)}
+.tbl-wrap{border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto;background:var(--white);margin-top:20px}
+table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+thead th{border-top:0;background:var(--face);font-size:13px;color:var(--sub);font-weight:700;white-space:nowrap}
+td.k{font-weight:700;white-space:nowrap}
+td.num,th.num{text-align:right;white-space:nowrap}
+tr.hi td{background:var(--soft-row,var(--green-soft))}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.compare > div{border:1px solid var(--line);border-radius:var(--radius);padding:20px;background:var(--white)}
+.compare h3{font-size:15px;margin-bottom:10px}
+.compare ul{list-style:none;display:grid;gap:8px;font-size:14px}
+.compare li{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:8px}
+.compare li:first-child{border-top:0;padding-top:0}
+.compare li span{color:var(--sub)}.compare li b{font-weight:700;text-align:right}
+.compare.c3{grid-template-columns:repeat(3,1fr)}
+.compare .best{border-color:var(--edge,var(--green));box-shadow:inset 0 3px 0 var(--edge,var(--green))}
+.bars{display:grid;gap:12px;margin-top:20px}
+.barrow{display:grid;grid-template-columns:170px 1fr 140px;gap:12px;align-items:center;font-size:14px}
+.barrow .track{height:12px;border-radius:999px;background:var(--face);overflow:hidden}
+.barrow .fill{height:100%;border-radius:999px;background:var(--c,var(--ink))}
+.barrow .v{text-align:right;font-weight:700;white-space:nowrap}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.flow > div{border:1px solid var(--line);border-radius:12px;padding:16px 14px;background:var(--white);position:relative}
+.flow .st{font-size:12px;font-weight:700;color:var(--ink2,var(--sub))}
+.flow h3{font-size:16px;margin-top:2px}.flow p{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.6}
+.flow.o{--ink2:var(--orange-ink)}.flow.r{--ink2:var(--red-ink)}.flow.g{--ink2:var(--green-ink)}
+.note{margin-top:20px;font-size:14px;color:var(--sub);background:var(--face);border-radius:12px;padding:14px 16px}
+.note b{color:var(--ink)}
+.sub-h{font-size:17px;font-weight:800;margin:40px 0 4px;letter-spacing:-.02em}
+.sub-h + p.body{color:var(--sub);font-size:15px}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}
+.grades div{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--white)}
+.grades b{display:block;font-size:24px;font-weight:800}
+.grades span{font-size:13px;color:var(--sub)}
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pn a{border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;background:var(--white);transition:transform .25s ease,box-shadow .25s ease,border-color .2s}
+.pn a:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--sub)}
+.pn small{display:block;font-size:12px;color:var(--sub);font-weight:700}
+.pn b{display:block;font-size:15px;font-weight:700;margin-top:4px;line-height:1.5}
+.pn .nx{text-align:right}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:700;padding:11px 22px;border-radius:999px;border:1px solid var(--ink);transition:transform .2s ease}
+.btn.solid{background:var(--ink);color:var(--white)}.btn.ghost{background:var(--white);border-color:var(--line)}
+.btn:hover{transform:translateY(-2px)}
+footer{border-top:1px solid var(--line);padding:40px 0 36px;margin-top:8px}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.foot b{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800}
+.foot p{font-size:14px;color:var(--sub);margin-top:8px}
+.foot .lk{display:flex;gap:18px;font-size:14px;color:var(--sub)}.foot .lk a:hover{color:var(--ink)}
+.copy{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--sub)}
+.js .rise{transition:transform .6s cubic-bezier(.2,.7,.2,1)}.js .rise.down{transform:translateY(16px)}
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.shots figure{margin:0}.shots a{display:block}.shots img{width:100%;height:auto;display:block}
+.shots figcaption{font-size:12px;color:var(--sub);margin-top:6px;text-align:center;line-height:1.5}
+.btns.left{justify-content:flex-start}
+a.inl{font-weight:700;border-bottom:1px solid var(--line)}a.inl:hover{border-color:var(--ink)}
+@media (max-width:820px){.nav{display:none}}
+@media (max-width:640px){
+.shots{grid-template-columns:1fr 1fr}
+ .wrap{padding:0 20px}section{padding:60px 0}section.first{padding-top:32px}
+ h1{font-size:30px}h2{font-size:23px;margin-bottom:22px}.lead{font-size:16px}
+ .meta{grid-template-columns:84px 1fr;font-size:14px;padding:18px}
+ .stats{grid-template-columns:1fr 1fr}.stat:nth-child(odd){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+ .ncards.c3,.ncards.c2,.compare,.compare.c3,.pn{grid-template-columns:1fr}
+ .flow,.grades{grid-template-columns:1fr 1fr}
+ .barrow{grid-template-columns:1fr auto;row-gap:6px}.barrow .lb{grid-column:1 / -1}
+ .pn .nx{text-align:left}
+ table{font-size:13px}th,td{padding:10px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}.js .rise.down{transform:none}.ncard:hover,.pn a:hover,.btn:hover{transform:none}}
+
+:root{--accent:#e5262e;--ink:#f2f2f2;--sub:#a1a1a6;--line:#2a2a2d;--face:#1a1a1d;--white:#0e0e10;
+--red:#ff5a52;--orange:#ffa630;--green:#35d058;--red-ink:#ff7a73;--orange-ink:#ffb85c;--green-ink:#5ee07c;
+--red-soft:#3a1716;--orange-soft:#3a2912;--green-soft:#12301b;--shadow:0 8px 24px rgba(0,0,0,.45)}
+html,body{background:#0b0b0c;color-scheme:dark}
+.glow,.lights{display:none}
+.head{background:rgba(11,11,12,.9);border-bottom-color:#1f1f22}
+.brand{color:var(--accent);font-size:21px;font-weight:800;letter-spacing:-.03em}
+.nav a.on{color:#fff}
+.back{background:transparent;border-color:rgba(255,255,255,.6);border-radius:4px;color:#fff}
+.back:hover{border-color:#fff}
+.win,.stats,.ncard,.tbl-wrap,.compare>div,.flow>div,.grades div,.pn a{background:#141416}
+.bar{background:#1b1b1e}
+.chip.line{background:transparent;border-color:#3a3a3e;color:#c8c8cc}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:#fff;border-radius:4px}
+.btn.ghost{background:transparent;border-color:rgba(255,255,255,.6);color:#fff;border-radius:4px}
+figure.fig .frame,.shots .frame{border-color:#2a2a2d}
+.label::before{background:var(--dot,var(--accent))}
+h1{background:linear-gradient(90deg,#fff 0 50%,#5b5b60 50% 100%);background-size:200% 100%;background-position:0 0;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wipe 1.1s cubic-bezier(.4,0,.2,1) both}
+@keyframes wipe{from{background-position:100% 0}to{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){h1{animation:none;background:none;color:#fff;-webkit-background-clip:border-box;background-clip:border-box}}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<header class="head"><div class="inner">
+  <a class="brand" href="../../" aria-label="곽지예 홈으로">KWAK JIYE</a>
+  <nav class="nav" aria-label="이 페이지 목차"><a href="#overview">개요</a><a href="#problem">문제</a><a href="#concept">컨셉</a><a href="#module">모듈</a><a href="#energy">설계 목표</a><a href="#process">과정</a><a href="#next">한계</a></nav>
+  <a class="back" href="../">← 프로젝트</a><a class="back" href="../../../projects/rest-area/" style="margin-left:-16px">Light ver.</a>
+</div></header>
+<main>
+  <section id="overview" class="first">
+    <div class="wrap">
+      <nav class="crumb" aria-label="현재 위치"><a href="../../">곽지예</a><span aria-hidden="true">›</span><a href="../">프로젝트</a><span aria-hidden="true">›</span><span>도로경관 공모전</span></nav>
+      <div class="label r">공모전 · 제15회 도로경관디자인 대전 (한국도로공사) · AI 활용 부문</div>
+      <h1>두 번 멈추는 휴게소</h1>
+      <p class="lead">주차면에서 한 번, 건물 앞에서 한 번. 페달을 잘못 밟은 차를 <b>두 번 멈춰 세우는</b>, 벤치처럼 보이는 방호선입니다. 차에게는 경고로, 사람에게는 쉼터로 읽히게 했습니다.</p>
+      <article class="win hero-card rise">
+        <div class="bar"><span class="lights" aria-hidden="true"><i>×</i><i>−</i><i>+</i></span><span class="title">contest — 두 번 멈추는 휴게소</span></div>
+        <dl class="meta"><dt>유형</dt><dd>개인 출품 · A1 판넬 1장 (A3 축소 제출)</dd><dt>주제</dt><dd>휴게소 보행자 충돌사고 예방 디자인</dd><dt>시기</dt><dd>2026년 10월 (접수 마감 10.29)</dd><dt>맡은 일</dt><dd>기획·컨셉·형태·치수 결정은 직접, 구현은 AI 도구와 함께</dd><dt>AI 도구</dt><dd>Claude(자료 조사·브리프) · Claude Code(CadQuery 3D 모델, matplotlib 도면, HTML 판넬) · DALL·E(투시도)</dd><dt>산출물</dt><dd>A1·A3 판넬, 3D 모델(STEP), 도면 5종</dd></dl>
+      </article>
+      <div class="stats rise"><div class="stat"><b>116건</b><span>휴게소 사고 (2020 ~ 2025.9)</span></div><div class="stat"><b>사망 10 · 부상 82</b><span>같은 기간 인명 피해</span></div><div class="stat"><b>2겹</b><span>1차 스토퍼 + 2차 방호선</span></div><div class="stat"><b>1,250mm</b><span>모듈 사이 통과 폭 (휠체어·유모차)</span></div></div><p class="stats-note">출처: 권영진 의원실·한국도로공사 제출 자료</p>
+    </div>
+  </section>
+  <section id="problem">
+    <div class="wrap">
+      <div class="label r">문제</div>
+      <h2>주차면에서 출발한 차가 건물까지 닿습니다</h2>
+
+      <p class="body rise">2025년 7월 2일 영동고속도로 대관령휴게소에서 페달을 잘못 밟은 SUV가 식당가로 돌진해 10명 이상이 다쳤습니다. 이 사고를 바탕으로 장면을 재구성했습니다. 건물 정면 주차면에서 가속페달을 밟은 차가 낮은 턱을 넘어 보행 공간을 가로지르고 유리벽 안까지 들어가는 상황입니다.</p>
+      <p class="note"><b>설계 범위</b> — 주차면에서 출발하는 저속 오조작 차량. 고속으로 휴게소에 진입하는 차량은 범위 밖으로 두고 판넬에 밝혔습니다.</p>
+<figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/render.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/render.jpg" alt="유리 외벽 휴게소 건물 앞에 벤치와 벽이 붙은 방호 모듈이 줄지어 놓인 투시도" loading="lazy"></a><figcaption>휴게소 건물 앞 적용 예시 (생성형 AI 이미지)</figcaption></figure>
+    </div>
+  </section>
+  <section id="concept">
+    <div class="wrap">
+      <div class="label r">컨셉</div>
+      <h2>두 겹으로 멈춰 세웁니다</h2>
+
+      <div class="ncards c2 rise">
+        <div class="ncard r"><span class="n">1</span><h3>1차 · 강화 스토퍼</h3><p>건물을 향한 주차면 앞쪽 끝에서, 속도가 붙기 전에 출발점에서 막음 (높이 150mm · 길이 2,000mm)</p></div>
+        <div class="ncard r"><span class="n">2</span><h3>2차 · 앉는 방호선</h3><p>건물 앞 벤치 모듈 안의 방호 코어가 차를 막고, 겉은 교체 가능한 외피로 감쌈</p></div>
+      </div>
+<figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/two-layer.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/two-layer.jpg" alt="기존 방식과 제안 방식 비교도: 제안에서는 1차 스토퍼와 2차 방호선이 차량을 건물 앞에서 멈춤" loading="lazy"></a><figcaption>기존(위)에는 차가 건물까지 진입, 제안(아래)에서는 2차 방호선에서 멈춤</figcaption></figure>
+    </div>
+  </section>
+  <section id="module">
+    <div class="wrap">
+      <div class="label r">모듈 설계</div>
+      <h2>벤치처럼 보이는 방호 모듈</h2>
+
+      <div class="tbl-wrap rise"><table>
+        <thead><tr><th>부위</th><th>치수·재료</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td class="k">방호 코어</td><td>콘크리트 충전 강관 ø165.2mm, 지상 900mm, 간격 1,500mm</td><td>법정 볼라드 기준 (높이 80~100cm, 지름 10~20cm, 간격 1.5m 안팎)</td></tr>
+          <tr><td class="k">모듈</td><td>1,750 × 750mm (코어 영역 250 + 좌면 500), 좌면 높이 450mm</td><td>코어는 주차면 쪽, 좌석은 건물을 보고 앉도록</td></tr>
+          <tr><td class="k">주차면 쪽 면</td><td>높이 900mm 등받이 벽, 상단에 교통 황색·재귀반사 띠</td><td>운전석에서 보이도록</td></tr>
+          <tr><td class="k">외피</td><td>재활용 플라스틱 3D프린트 패널, 세로 리브 10개, 볼트 체결</td><td>충격 흡수, 색이 재료에 일체화, 파손 패널만 교체</td></tr>
+          <tr><td class="k">기초</td><td>얕은 연결 기초 1,800 × 900 × 400mm</td><td>기존 포장을 깊이 파지 않기 위함 (구조 검토 후 확정)</td></tr>
+          <tr><td class="k">배치</td><td>피치 3,000mm (모듈 1,750 + 통과 폭 1,250), 코어 전면 0.3m 점형블록</td><td>교통약자의 이동편의 증진법 시행규칙 제9조·별표2</td></tr>
+        </tbody></table></div>
+<figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/section.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/section.jpg" alt="모듈 단면도: 기초 깊이 400, 코어 지상 900, 좌면 높이 450, 모듈 폭 750 치수 표기" loading="lazy"></a><figcaption>모듈 단면도 (단위 mm)</figcaption></figure><figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/shell-options.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/shell-options.jpg" alt="외피 형태 3가지 스케치: 단순 박스, 상단 경사형, 세로 리브" loading="lazy"></a><figcaption>외피 형태 3안 중 C안(세로 리브)을 골랐습니다 — 야간 시인성, 미끄럼 방지 그립감, 패널 분할선</figcaption></figure><figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/module.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/module.jpg" alt="노란 외피와 코어 2개, 기초, 벤치로 구성된 모듈 등각 3D 모델" loading="lazy"></a><figcaption>CadQuery로 만든 모듈 3D 모델 — 노란 부분이 3D프린트 적용 부위(가점 대상)</figcaption></figure><figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/site-plan.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/site-plan.jpg" alt="건물 정면 앞에 방호선 모듈과 점형블록, 주차면 앞 강화 스토퍼가 배치된 평면도" loading="lazy"></a><figcaption>배치 평면도 — 주차면 폭 2,700, 모듈 피치 3,000, 통과 폭 1,250</figcaption></figure>
+    </div>
+  </section>
+  <section id="energy">
+    <div class="wrap">
+      <div class="label r">설계 목표</div>
+      <h2>막아야 할 충돌 에너지</h2>
+
+      <p class="body rise">운동에너지 E = ½mv²로 차량 무게와 속도별로 막아야 할 힘을 계산했습니다. 이 값은 <b>설계 목표를 정하기 위한 참고값</b>이며, 시설물이 이 힘을 견딘다는 성능 보증이 아닙니다.</p>
+      <div class="bars rise">
+        <div class="barrow"><span class="lb">1,200kg · 20km/h</span><div class="track"><div class="fill" style="width:10.8%;--c:var(--orange)"></div></div><span class="v">18.5kJ</span></div>
+        <div class="barrow"><span class="lb">1,500kg · 25km/h</span><div class="track"><div class="fill" style="width:21.1%;--c:var(--orange)"></div></div><span class="v">36.2kJ</span></div>
+        <div class="barrow"><span class="lb">1,500kg · 30km/h</span><div class="track"><div class="fill" style="width:30.3%;--c:var(--orange)"></div></div><span class="v">52.1kJ</span></div>
+        <div class="barrow"><span class="lb">1,800kg · 35km/h</span><div class="track"><div class="fill" style="width:49.5%;--c:var(--red)"></div></div><span class="v">85.1kJ</span></div>
+        <div class="barrow"><span class="lb">2,000kg · 40km/h</span><div class="track"><div class="fill" style="width:71.8%;--c:var(--red)"></div></div><span class="v">123.5kJ</span></div>
+        <div class="barrow"><span class="lb">2,200kg · 45km/h</span><div class="track"><div class="fill" style="width:100%;--c:var(--red)"></div></div><span class="v">171.9kJ</span></div>
+      </div>
+
+    </div>
+  </section>
+  <section id="process">
+    <div class="wrap">
+      <div class="label r">과정</div>
+      <h2>기획은 직접, 구현은 AI와 함께</h2>
+
+      <ol class="steps r rise">
+        <li class="step"><span class="num">1</span><div class="txt"><h3>기획</h3><p>공모요강·사고 통계를 확인하고 작업 브리프를 작성. 컨셉·작품명·형태·확정 치수는 직접 결정하고, 근거 없는 수치는 쓰지 않는다는 규칙을 먼저 세움</p></div></li>
+        <li class="step"><span class="num">2</span><div class="txt"><h3>3D 모델</h3><p>코어·기초·벤치·외피 치수를 변수로 모아 CadQuery로 모델링하고 STEP 파일로 내보냄</p></div></li>
+        <li class="step"><span class="num">3</span><div class="txt"><h3>도면</h3><p>사고 장면, 두 겹 방어 개념도, 단면도, 배치 평면도, 운동에너지 그래프 5종</p></div></li>
+        <li class="step"><span class="num">4</span><div class="txt"><h3>투시도</h3><p>DALL·E로 메인 투시도 생성. 다른 도구로 만든 분해도는 구조가 맞지 않아 쓰지 않고 CAD 렌더로 바꿈</p></div></li>
+        <li class="step"><span class="num">5</span><div class="txt"><h3>판넬</h3><p>A1 판넬을 HTML/CSS로 조립해 A1·A3 PDF와 A3 JPG로 출력, 프롬프트 기록을 제출용으로 정리</p></div></li>
+      </ol>
+<figure class="fig rise"><a class="frame" href="../../../projects/rest-area/img/panel.jpg" target="_blank" rel="noopener"><img src="../../../projects/rest-area/img/panel.jpg" alt="두 번 멈추는 휴게소 출품 판넬 전체" loading="lazy"></a><figcaption>출품 판넬 (A3 제출본)</figcaption></figure>
+    </div>
+  </section>
+  <section id="next">
+    <div class="wrap">
+      <div class="label r">한계와 다음 단계</div>
+      <h2>구조 검토가 남아 있습니다</h2>
+
+      <div class="ncards c3 rise">
+        <div class="ncard"><span class="n">1</span><h3>구조 검증</h3><p>강관 두께와 기초 크기는 가정값입니다. 충돌시험이나 구조해석 없이 성능을 말하지 않았습니다.</p></div>
+        <div class="ncard"><span class="n">2</span><h3>외피 내후성</h3><p>재활용 플라스틱 3D프린트 패널이 햇빛·비에 얼마나 견디는지 검토가 필요합니다.</p></div>
+        <div class="ncard"><span class="n">3</span><h3>적용 범위</h3><p>저속 오조작 차량이 대상이며, 고속 진입 차량은 다른 대책이 필요합니다.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="more">
+    <div class="wrap">
+      <div class="label">이어서 보기</div>
+      <h2>다른 프로젝트</h2>
+      <div class="pn">
+        <a href="../osc-dmp/"><small>← 이전</small><b>OSC 생애주기 관리를 위한 Digital Module Passport</b></a>
+        <a class="nx" href="../ai-apps/"><small>다음 →</small><b>AI 활용 프로젝트 — LRFD 놀이터 · 지예건설</b></a>
+      </div>
+      <div class="btns">
+        <a class="btn solid" href="../">프로젝트 목록</a>
+        <a class="btn ghost" href="../../">곽지예 소개</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">
+  <div class="foot">
+    <div><b>곽지예</b><p>현장을 이해하고 사람을 이끄는, 차세대 건설리더를 꿈꿉니다.</p></div>
+    <div class="lk"><a href="../../">소개</a><a href="../">프로젝트</a><a href="mailto:wldp2003@naver.com">wldp2003@naver.com</a></div>
+  </div>
+  <p class="copy">© 2026 곽지예. All rights reserved.</p>
+</div></footer>
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var links=[].slice.call(document.querySelectorAll('.nav a'));
+ var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+ function cur(){var y=window.scrollY+window.innerHeight*.35,c=secs[0];
+  secs.forEach(function(s){if(s.getBoundingClientRect().top+window.scrollY<=y)c=s;});
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4)c=secs[secs.length-1];
+  links.forEach(function(a){var on=a.getAttribute('href')==='#'+c.id;a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current');});}
+ var t=false;window.addEventListener('scroll',function(){if(!t){t=true;requestAnimationFrame(function(){cur();t=false;});}},{passive:true});
+ window.addEventListener('resize',cur);cur();
+ if(reduce||!('IntersectionObserver' in window))return;
+ document.documentElement.classList.add('js');
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.remove('down');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+ document.querySelectorAll('.rise').forEach(function(el){if(el.getBoundingClientRect().top>window.innerHeight*.92){el.classList.add('down');io.observe(el);}});
+})();
+</script>
+</body>
+</html>

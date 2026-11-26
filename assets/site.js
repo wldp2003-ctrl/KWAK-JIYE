@@ -1,6 +1,7 @@
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ROOT = document.documentElement.getAttribute('data-root') || '';
+  var PROJ = document.documentElement.getAttribute('data-proj'); /* 다른 버전(v2)에서 프로젝트 링크를 그 버전 페이지로 */
 
   /* 좁은 화면: 메뉴 줄에서 지금 페이지가 보이도록 */
   var nav = document.querySelector('.nav'), on = nav && nav.querySelector('.on');
@@ -88,7 +89,7 @@
       });
       var many = cur.p.length > 1;
       gPrev.hidden = gNext.hidden = gTh.hidden = gCnt.hidden = !many;
-      if (cur.link){ gLink.href = ROOT + cur.link; gLink.hidden = false; } else { gLink.hidden = true; }
+      if (cur.link){ gLink.href = PROJ ? PROJ + cur.link.replace('projects/', '') : ROOT + cur.link; gLink.hidden = false; } else { gLink.hidden = true; }
       show(0);
       dlg.showModal();
       document.documentElement.style.overflow = 'hidden';
