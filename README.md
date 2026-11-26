@@ -22,7 +22,7 @@ site/
  │   ├─ winter-concrete/  발열팩 분말 영하 환경 콘크리트 연구 (캡스톤)
  │   ├─ osc-dmp/          OSC Digital Module Passport (차세대 건설리더 아카데미)
  │   ├─ rest-area/        두 번 멈추는 휴게소 (도로경관디자인 대전)
- │   └─ ai-apps/          AI 활용 프로젝트 (하반기 캡스톤) — play/에 LRFD 놀이터·지예건설 원본 앱
+ │   └─ ai-apps/          AI 활용 프로젝트 (하반기 캡스톤) — play/에 LRFD 놀이터 원본 앱 (지예건설은 별도 저장소 jiye-construction)
  ├─ contact/            연락 (마무리 메시지, 이메일)
  ├─ assets/site.css     메인과 위 페이지들이 함께 쓰는 디자인
  ├─ assets/site.js      메뉴, 활동 분류, 사진 보기 창, 스크롤 효과
